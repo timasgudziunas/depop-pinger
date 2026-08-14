@@ -79,12 +79,16 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 6 — tracker.py (orchestration)
 
-- [ ] `fetch_listings()` → `matches_criteria()` filter → `is_new()` filter →
+- [x] `fetch_listings()` → `matches_criteria()` filter → `is_new()` filter →
       `send_alert()` for each new match → `mark_seen()` → save state.
-- [ ] Log a one-line summary each run (checked N listings, M matched
+      *(Plus: very first run (no state file) seeds all current matches
+      silently instead of blasting an alert for every listing already live;
+      failed pushes still mark seen so they don't re-alert every run.)*
+- [x] Log a one-line summary each run (checked N listings, M matched
       criteria, K were new).
-- [ ] Exit cleanly with non-zero status on unhandled errors so GitHub
-      Actions surfaces failures.
+- [x] Exit cleanly with non-zero status on unhandled errors so GitHub
+      Actions surfaces failures. *(End-to-end tested live 2026-08-14:
+      24 listings fetched, first-run seed wrote seen_listings.json.)*
 
 ## Phase 7 — GitHub Actions
 
