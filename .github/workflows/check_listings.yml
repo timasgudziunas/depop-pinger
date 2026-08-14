@@ -1,0 +1,46 @@
+name: Check Depop listings
+
+on:
+  schedule:
+    # Every 5 minutes: GitHub's minimum, chosen because matching listings
+    # sell within minutes. Real-world cron delivery is delayed 3-15 min on
+    # busy runners; if runs pile up or get skipped, relax to */15.
+    - cron: "*/5 * * * *"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write # commit updated seen_listings.json back to the repo
+
+concurrency:
+  group: check-listings
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run tracker
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+        run: python tracker.py
+
+      - name: Commit updated state
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if ! git diff --quiet seen_listings.json; then
+            git add seen_listings.json
+            git commit -m "update seen listings [skip ci]"
+            git pull --rebase origin main
+            git push
+          fi

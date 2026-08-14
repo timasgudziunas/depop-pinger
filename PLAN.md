@@ -92,15 +92,18 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 7 — GitHub Actions
 
-- [ ] `.github/workflows/check_listings.yml`: cron schedule (every 5–15 min
+- [x] `.github/workflows/check_listings.yml`: cron schedule (every 5–15 min
       — same constraint as ticket-sniper: 5 min is GitHub's minimum, 15 min
       is the friendlier default for a public repo), checkout, set up
       Python, install deps, run `tracker.py` with secrets injected, commit
-      updated `seen_listings.json` back to the repo.
+      updated `seen_listings.json` back to the repo. *(Went with */5 since
+      listings sell within minutes; relax to */15 if runs pile up.)*
 - [ ] Add `NTFY_TOPIC` (and `SCRAPER_API_KEY` if applicable) as GitHub
-      Actions repo secrets.
+      Actions repo secrets. *(blocked — gh CLI not logged in on this
+      machine; run `gh auth login`, then
+      `gh secret set NTFY_TOPIC` with the topic from local .env.)*
 - [ ] Trigger a manual workflow run to confirm end-to-end before relying on
-      the schedule.
+      the schedule. *(blocked — same gh auth prerequisite, plus push.)*
 
 ## Phase 8 — Fill in real criteria and go live
 
