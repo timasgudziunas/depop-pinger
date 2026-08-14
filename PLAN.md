@@ -51,25 +51,31 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 3 — filters.py
 
-- [ ] `matches_criteria(listing: dict, config) -> bool`:
+- [x] `matches_criteria(listing: dict, config) -> bool`:
       checks size against `TARGET_SIZES` (skip size filtering entirely if
       the list is still empty, so the tool is testable before criteria are
-      finalized) and price against `MAX_PRICE` if set.
-- [ ] Unit-test against the Phase 2 fixture with a few hand-picked
-      pass/fail cases.
+      finalized) and price against `MAX_PRICE` if set. *(Criteria injectable
+      as kwargs for testing; listings with no parseable size do NOT match
+      once sizes are specified — flip in filters.py if that under-fires.)*
+- [x] Unit-test against the Phase 2 fixture with a few hand-picked
+      pass/fail cases. *(tests/test_filters.py, 11 cases, all passing.)*
 
 ## Phase 4 — state.py
 
-- [ ] Load/save `seen_listings.json` as `{listing_id: first_seen_timestamp}`.
-- [ ] `is_new(listing_id) -> bool` and `mark_seen(listing_id)`.
-- [ ] Prune entries older than 14 days on each save.
+- [x] Load/save `seen_listings.json` as `{listing_id: first_seen_timestamp}`.
+- [x] `is_new(listing_id) -> bool` and `mark_seen(listing_id)`.
+- [x] Prune entries older than 14 days on each save. *(tests/test_state.py,
+      8 cases, all passing.)*
 
 ## Phase 5 — notifier.py
 
-- [ ] `send_alert(listing: dict)` posts to ntfy.sh topic (`NTFY_TOPIC` env
+- [x] `send_alert(listing: dict)` posts to ntfy.sh topic (`NTFY_TOPIC` env
       var) with title, price, size, and link — mirror the notifier pattern
-      from ticket-sniper.
+      from ticket-sniper. *(Click header opens the listing; Attach header
+      shows the item photo.)*
 - [ ] Manual test: trigger one fake alert, confirm it lands on phone.
+      *(blocked — waiting on Timas to pick/provide an NTFY_TOPIC; then run
+      `python notifier.py` with the topic set and confirm on phone.)*
 
 ## Phase 6 — tracker.py (orchestration)
 
