@@ -31,15 +31,23 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 2 — depop_client.py (data source)
 
-- [ ] Decide between the two data source options in CLAUDE.md. Start with
+- [x] Decide between the two data source options in CLAUDE.md. Start with
       option 1 (mimicked search request) for zero external dependencies.
-- [ ] Implement `fetch_listings(query: str) -> list[dict]` returning
+      *(Went with option 1, but the old `webapi.depop.com` JSON endpoint is
+      deprecated (HTTP 410) — the client fetches depop.com's own search
+      results HTML and parses the embedded Next.js RSC payload instead.
+      See depop_client.py module docstring for schema details and caveats.)*
+- [x] Implement `fetch_listings(query: str) -> list[dict]` returning
       normalized dicts: `{id, title, price, size, url, image_url}`.
-- [ ] Save a sample raw response as a fixture file for testing.
-- [ ] Manual smoke test: run standalone, confirm it returns real, current
-      listings for "lululemon speedup shorts" with no crash.
-- [ ] If option 1 gets blocked/empty/inconsistent during smoke testing,
+      *(Plus `currency`. `sort=newest` is best-effort — no timestamp field
+      exists in the response to verify strict ordering.)*
+- [x] Save a sample raw response as a fixture file for testing.
+- [x] Manual smoke test: run standalone, confirm it returns real, current
+      listings for "lululemon speedup shorts" with no crash. *(24 live
+      listings returned, 2026-08-14.)*
+- [x] If option 1 gets blocked/empty/inconsistent during smoke testing,
       swap to option 2 (scraper API) — only this file should need to change.
+      *(Not needed — option 1 worked with no Cloudflare challenges.)*
 
 ## Phase 3 — filters.py
 

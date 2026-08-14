@@ -1,0 +1,3901 @@
+{
+  "meta": {
+    "total_count": 1358
+  },
+  "page_info": {
+    "has_more": true,
+    "last": "MnwyNHwxNzg2NzE5NDM0.BOOSTED_EXHAUSTED.0"
+  },
+  "objects": [
+    {
+      "id": 865998384,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon High Rise Speed Up 4” inseam blue shorts size 4 #activewear #athletic #lululemon #speedup #lulushorts",
+      "pictures": [
+        {
+          "id": 4439715128,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/16132664/4439715128_d1dc53af72e34117b97826acfe78d945/P0.jpg"
+            }
+          },
+          "original_width": 946,
+          "original_height": 1261,
+          "is_square": false
+        },
+        {
+          "id": 4439713273,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/16132664/4439713273_da4d60e4b93344dba582924594b55e2a/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4439715356,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/16132664/4439715356_327fcaf7c95e46c3ae8a459d0d1af18d/P0.jpg"
+            }
+          },
+          "original_width": 787,
+          "original_height": 1049,
+          "is_square": false
+        },
+        {
+          "id": 4439715129,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/16132664/4439715129_5846c6ecafb44be4a140c5e3ee1bf7f5/P0.jpg"
+            }
+          },
+          "original_width": 916,
+          "original_height": 1221,
+          "is_square": false
+        }
+      ],
+      "location": "Great Falls, United States",
+      "country": "US",
+      "slug": "cej23-lululemon-speed-up-4-inseam-6e4c",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "pink",
+          "red"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 25285873
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4439715128,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/16132664/4439715128_d1dc53af72e34117b97826acfe78d945/P0.jpg"
+          }
+        },
+        "original_width": 946,
+        "original_height": 1261,
+        "is_square": false
+      },
+      "like_count": 10,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "9.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "9.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "9.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "9.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 865279394,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "lululemon light pink speed ups, barely worn! \n\nsize 2\n\n#lululemon #speedups #runningshorts",
+      "pictures": [
+        {
+          "id": 4435851032,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/416952077/4435851032_a87b8a9cee764e6985dfe751fc090fc1/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4435850545,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/416952077/4435850545_5eb40276afb34e439ee8c77f9118f1c0/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4435850294,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/416952077/4435850294_c0bda1a6b9e947378c8d2fc7b1fa1d8d/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Durham, United States",
+      "country": "US",
+      "slug": "saimalourdes-lululemon-light-pink-speed-ups-f05c",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "pink"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 34808990
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "2",
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "preview": {
+        "id": 4435851032,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/416952077/4435851032_a87b8a9cee764e6985dfe751fc090fc1/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 3,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 866389975,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "lululemon low rise speed ups size 6 tall 2.5 inch\nlogo still intact used but great condition, lining cut out\n#lululemon #speedup #shorts #black #athletic",
+      "pictures": [
+        {
+          "id": 4441819559,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/255500302/repop_25049947_4384300429/4441819559_be88654894c544ac9d214104ffbce0d3/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4441817386,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/255500302/repop_25049947_4384311501/4441817386_07e722a162db473fb676bf4b2d393133/P0.jpg"
+            }
+          },
+          "original_width": 961,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4441820120,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/255500302/repop_25049947_4384311899/4441820120_7d089df5394a4cb5bff795bf81861429/P0.jpg"
+            }
+          },
+          "original_width": 961,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4441820202,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/255500302/repop_25049947_4384313104/4441820202_ac84e47b045b44a1932a36206cd00fcf/P0.jpg"
+            }
+          },
+          "original_width": 732,
+          "original_height": 975,
+          "is_square": false
+        }
+      ],
+      "location": "Spring, United States",
+      "country": "US",
+      "slug": "sydn18112-lululemon-low-rise-speed-ups-51ec",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts",
+        "repop_metadata": {
+          "original_product_id": 855856231,
+          "original_seller_id": 25049947,
+          "purchase_item_id": 314809190
+        }
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 46370967
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "6",
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "preview": {
+        "id": 4441819559,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/255500302/repop_25049947_4384300429/4441819559_be88654894c544ac9d214104ffbce0d3/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 2,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "18.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "18.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "18.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "18.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 841470694,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon black speed up shorts ~ low rise + 2.5inch | size 2\n\n#lululemon #shorts #summer #activewear #speedups",
+      "pictures": [
+        {
+          "id": 4306729620,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/51786138/4306729620_f0f325d704d0472486ac38611775cfb6/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4306743466,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/51786138/4306743466_bb37aa6d4c5d4d6e9662932dea533ac8/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4306745387,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/51786138/4306745387_2fb0057e516e4d0fbbfe51ee99d203cf/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4306747054,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/51786138/4306747054_1f537a29c7ae4b4b9a89e79d6c3217cf/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Boynton Beach, United States",
+      "country": "US",
+      "slug": "sarayu_pdddada-lululemon-black-speed-up-shorts-912d",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "small",
+        "payer": "buyer",
+        "ship_from": 27813313
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "2",
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "preview": {
+        "id": 4306729620,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/51786138/4306729620_f0f325d704d0472486ac38611775cfb6/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 51,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "60.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "60.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "60.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "60.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 795038873,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon pink speed up low rise short 2.5” #lululemon #athleisure #yoga #trending #speedup",
+      "pictures": [
+        {
+          "id": 4024746005,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/380634711/4024746005_fd7ebdbd11a240809cb5ee179c7b83d7/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4024746011,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/380634711/4024746011_6701a5a170634aba8227be9f3c819e6d/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4024746015,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/380634711/4024746015_a7630418583a4f18a228552902b8ad1d/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        }
+      ],
+      "location": "Saint Charles, United States",
+      "country": "US",
+      "slug": "baileychrisrina5-lululemon-pink-speed-up-low-5b72",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "pink"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 43299394
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4024746005,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/380634711/4024746005_fd7ebdbd11a240809cb5ee179c7b83d7/P0.jpg"
+          }
+        },
+        "original_width": 1024,
+        "original_height": 1024,
+        "is_square": true
+      },
+      "like_count": 9,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "35.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "35.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "35.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "35.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 866377272,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon Navy Blue Shorts\nSpeed Up Shorts Low Rise\n2.5 in inseam\n\n#activewear #athletic",
+      "pictures": [
+        {
+          "id": 4436614654,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/317552450/4436614654_e5fdc7e5459d4723845a167c62e6962b/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4436614469,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/317552450/4436614469_15e7809a4c024de4a47aafb2ab06bb9f/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4436615904,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/317552450/4436615904_18b99ab4eeb44e1598d21a5fae197fc6/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4436614088,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/317552450/4436614088_48d71d9a33c34371a248c2ccf1bcb578/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4436615800,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/317552450/4436615800_37af4d8074684ac7b70383405a41f273/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Austin, US",
+      "country": "US",
+      "slug": "mrlly00730-lululemon-navy-blue-shorts-speed-1fbe",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 28,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "S"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "navy",
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_12oz",
+        "payer": "buyer",
+        "ship_from": 43991239
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-14T03:41:09.159003Z",
+      "sizes": [
+        {
+          "name": "S",
+          "id": 28,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "S"
+        }
+      ],
+      "preview": {
+        "id": 4436614654,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/317552450/4436614654_e5fdc7e5459d4723845a167c62e6962b/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 20,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 863374727,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon speedups 2.5 size 4\n\nno flaws\n\n#activewear #athletic #lululemon #depopsweepstakes",
+      "pictures": [
+        {
+          "id": 4425270236,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/469414509/4425270236_2ff4936262db438998c8616c4a97c242/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4425270597,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/469414509/4425270597_87d8214a3ddd4cbbb64fb585ec85cb3f/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4425270022,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/469414509/4425270022_e3fb263bb5d8440fa42a9eb5d1b0978e/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Cape Elizabeth, United States",
+      "country": "US",
+      "discount_percentage": 10,
+      "slug": "eller2sclosett-lululemon-speedups-size-4-no-08a2",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts",
+        "repop_metadata": {
+          "original_product_id": 805523254,
+          "original_seller_id": 255115643,
+          "purchase_item_id": 298556460
+        }
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 38761827
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-12T13:40:24.907269Z",
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4425270236,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/469414509/4425270236_2ff4936262db438998c8616c4a97c242/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 108,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "40.50",
+          "price_breakdown": {
+            "price": {
+              "amount": "40.50"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "45.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "45.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "discounted_price": {
+          "total_price": "40.50",
+          "price_breakdown": {
+            "price": {
+              "amount": "40.50"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": true,
+        "final_price_key": "discounted_price",
+        "discount_percentage": 10
+      }
+    },
+    {
+      "id": 859563173,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon pink speedups",
+      "pictures": [
+        {
+          "id": 4404767127,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/331859150/4404767127_466b806798a6415f8507af2fccac0cfa/P0.jpg"
+            }
+          },
+          "original_width": 721,
+          "original_height": 960,
+          "is_square": false
+        },
+        {
+          "id": 4404769602,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/331859150/4404769602_a4f7aa0483ff42a29a9d6c8ec876daf9/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4404766219,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/331859150/4404766219_9e47cb23bd244bd1be88cec0ee2816ff/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Tallahassee, United States",
+      "country": "US",
+      "slug": "oneal_sunsetnrange14-lululemon-pink-speedups-984a",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "brand_new",
+        "colour": [
+          "pink"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 47450128
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-09T22:09:55.082257Z",
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4404767127,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/331859150/4404767127_466b806798a6415f8507af2fccac0cfa/P0.jpg"
+          }
+        },
+        "original_width": 721,
+        "original_height": 960,
+        "is_square": false
+      },
+      "like_count": 40,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 668483661,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Olive green Lululemon Speed Up shorts #lululemon #speedup",
+      "pictures": [
+        {
+          "id": 3290154218,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/41489509/3290154218_eeeed6a7c06b4ea0a3d71a0971bd9030/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 3290154219,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/41489509/3290154219_c383e127fc10405f8988a06ad9d95995/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        }
+      ],
+      "location": "South Lyon, United States",
+      "country": "US",
+      "slug": "kaitlinruschak-olive-green-lululemon-speed-up",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "grey",
+          "green"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "small",
+        "payer": "buyer",
+        "ship_from": 38071557
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-01-12T21:35:01.913337Z",
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 3290154218,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/41489509/3290154218_eeeed6a7c06b4ea0a3d71a0971bd9030/P0.jpg"
+          }
+        },
+        "original_width": 1024,
+        "original_height": 1024,
+        "is_square": true
+      },
+      "like_count": 5,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "5.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "5.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "5.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "5.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 865744731,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "SUPER RARE lulu shorts speed up’s\nSize 4 Great Condition! \nWisteria Purple \n#preppy #lulu #sporty #rarelulu #speedups",
+      "pictures": [
+        {
+          "id": 4438359933,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/33895484/4438359933_c0bbb5b5a1574a1086140d6b6d4c245e/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4438359071,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/33895484/4438359071_bcfb276e965a4b57acc458aad7eec54c/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4438357687,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/33895484/4438357687_a35f93aa738d4f268e4a5c832d4096d5/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Summit, United States",
+      "country": "US",
+      "slug": "maddielhicku-super-rare-lulu-shorts-speed-8124",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "purple",
+          "pink"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 47998879
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-13T20:46:49.021180Z",
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4438359933,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/33895484/4438359933_c0bbb5b5a1574a1086140d6b6d4c245e/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 2,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "30.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "30.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "30.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "30.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 866333320,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Highlight Orange Lululemon speed ups. Size 4 2.5 inch. In great condition nothing wrong with them. They are discontinued so why they are priced at. Send offers or message me. #lululemon #speedups #shorts #orange",
+      "pictures": [
+        {
+          "id": 4441505546,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/302809902/4441505546_618c7cba29144cd688be92c75184a9e6/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Coldwater, United States",
+      "country": "US",
+      "slug": "wornbyeqma-highlight-orange-lululemon-speed-ups-297f",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "orange"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 31944108
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4441505546,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/302809902/4441505546_618c7cba29144cd688be92c75184a9e6/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 1,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 866783420,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon Neon Yellow Speed up shorts!\n2.5 inseam, gorgeous neon yellow that stands out! Great condition super comfy!\nSize 14\n#lululemon #shorts #speedup #yellow",
+      "pictures": [
+        {
+          "id": 4444075555,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/432166802/4444075555_c0a2796162a8451e81b69ccb35531be9/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4444077245,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/432166802/4444077245_10bf957846504478b6938af4f99bb5ec/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4444075874,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/432166802/4444075874_50d41897e61f4193b58c5698b7cd32ee/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4444079143,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/432166802/4444079143_793dd43e6577464e9549cbeba1550640/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        },
+        {
+          "id": 4444081347,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/432166802/4444081347_4d46b5c73e27440795e83c22527bd7b0/P0.jpg"
+            }
+          },
+          "original_width": 1024,
+          "original_height": 1024,
+          "is_square": true
+        }
+      ],
+      "location": "Lockport, United States",
+      "country": "US",
+      "slug": "amblr_1618-lululemon-neon-yellow-speed-up-778d",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 37,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "14"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "yellow"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "small",
+        "payer": "buyer",
+        "ship_from": 37149780
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-14T14:55:46.957886Z",
+      "sizes": [
+        {
+          "name": "14",
+          "id": 37,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "14"
+        }
+      ],
+      "preview": {
+        "id": 4444075555,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/432166802/4444075555_c0a2796162a8451e81b69ccb35531be9/P0.jpg"
+          }
+        },
+        "original_width": 1024,
+        "original_height": 1024,
+        "is_square": true
+      },
+      "like_count": 0,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "12.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "12.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "12.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "12.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 861694164,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "lulu speed-up low rise 2.5",
+      "pictures": [
+        {
+          "id": 4416085979,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/420772344/4416085979_ab8c486f76434e2cafcb1af651f2ac84/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4416090726,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/420772344/4416090726_b2742895aa9443b4a502c4ee146a58b8/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Gansevoort, United States",
+      "country": "US",
+      "slug": "phowt23-lulu-speed-up-low-rise-25-0d3a",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "blue"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 33109582
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4416085979,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/420772344/4416085979_ab8c486f76434e2cafcb1af651f2ac84/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 8,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "45.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "45.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "45.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "45.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 863961284,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Black Lululemon speed ups size 4 fits like a size 2\nNot sold anymore! MESSAGE before buying to make you a separate listing so boost is off!!\n4in\n#lululemon #speedups #scuba #definejacket #rare",
+      "pictures": [
+        {
+          "id": 4428637450,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/42505540/4428637450_1c4772308dbc40c3b77680ddd8b1c2ad/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4428638505,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/42505540/4428638505_b4e64aca9ef0488b9c5638102e361c78/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4428638210,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/42505540/4428638210_dc63da4dc39e4c4c808aee7c8f15f6b4/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4428636573,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/42505540/4428636573_7c26d300150c4dfa904f8c3e8fe826c0/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Ashkum, United States",
+      "country": "US",
+      "slug": "aubrey_jakey-black-lululemon-speed-ups-size-c3c5",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "black",
+          "grey"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts",
+        "additional_attributes": {
+          "size-fit": [
+            "runs-small"
+          ]
+        }
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 22915002
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "2",
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "preview": {
+        "id": 4428637450,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/42505540/4428637450_1c4772308dbc40c3b77680ddd8b1c2ad/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 8,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "27.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "27.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "27.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "27.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 862402582,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Black 2.5 inch low rise lululemon speed ups",
+      "pictures": [
+        {
+          "id": 4420084364,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/415156086/4420084364_b9fa702292c54deaa11482450197f58c/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4420083622,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/415156086/4420083622_fba6984914ee4b7a8fce5000e95c1e83/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Arlington, United States",
+      "country": "US",
+      "slug": "janie_malroy-black-25-inch-low-rise-447e",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 43409201
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4420084364,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/415156086/4420084364_b9fa702292c54deaa11482450197f58c/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 5,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "40.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "40.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "40.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "40.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 866663821,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon low rise 2.5 pink shorts size 6 #lululemon #lulu #speedups #lululemonshorts",
+      "pictures": [
+        {
+          "id": 4443366483,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/48531134/4443366483_4d2d153d2bcc4a8c8be3174c3171bbc6/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Chicago, United States",
+      "country": "US",
+      "slug": "hollywnodhooper26-lululemon-low-rise-25-pink-58d8",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "brand_new",
+        "colour": [
+          "pink"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 24055188
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "6",
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "preview": {
+        "id": 4443366483,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/48531134/4443366483_4d2d153d2bcc4a8c8be3174c3171bbc6/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 3,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "30.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "30.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "30.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "30.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 865606716,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon white speed up shorts Size 4 #athleisure #running",
+      "pictures": [
+        {
+          "id": 4437641097,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/27690632/4437641097_b77aa7ba0f094271b054ec5f629ad76c/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4437640904,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/27690632/4437640904_2d8c72b814d04d0e8e16c3b96990d973/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4437641000,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/27690632/4437641000_055fadaa98aa4580a114878ed75a8abb/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4437639381,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/27690632/4437639381_bdb8919bb7c942c6b8d6360f55b800dd/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "New York, United States",
+      "country": "US",
+      "slug": "anjalibudhra0-lululemon-white-speed-up-shorts-2f5d",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "white"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 41297393
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4437641097,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/27690632/4437641097_b77aa7ba0f094271b054ec5f629ad76c/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 4,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 865320890,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Navy blue lulu speed up shorts!\n\nNo longer fit but wanted to show them on, I have worn them quite a bit but they are still in great condition, perfect for running.\n\n#lulu #shorts #speedup #runner\n\nHigh waist, size 4",
+      "pictures": [
+        {
+          "id": 4436079958,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/208830298/4436079958_9ed7734eb97d4e3e8cc92db1fb6d5d15/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4436080342,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/208830298/4436080342_00a6a474b85a4b919586382c2ffaeab9/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4436078585,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/208830298/4436078585_4ee8753a9631409780c2403c6a22ee64/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4436080249,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/208830298/4436080249_5ea7be5368d94f5fabb1a12511f545ef/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4436079959,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/208830298/4436079959_d596655c6b1640aa9cce2324e0f776b0/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Goshen, United States",
+      "country": "US",
+      "slug": "e0mydow21-navy-blue-lulu-speed-up-ab86",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_good",
+        "colour": [
+          "navy",
+          "black"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 33354838
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-13T15:55:57.081631Z",
+      "sizes": [
+        {
+          "name": "4",
+          "id": 6,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "4"
+        }
+      ],
+      "preview": {
+        "id": 4436079958,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/208830298/4436079958_9ed7734eb97d4e3e8cc92db1fb6d5d15/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 0,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "22.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "22.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "22.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "22.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 862113090,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "lululemon speed up shorts size 6 light blue\n\nLiner cut out\n\n\n#lululemon #speedup #shorts #activewear #workout",
+      "pictures": [
+        {
+          "id": 4418476904,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/27444767/4418476904_f1c38b0fae834a39ad2ac2bb0984e83e/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4418476868,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/27444767/4418476868_e3103493e36a478ebcab426b2e722bed/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4418477750,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/27444767/4418477750_69f506e40b844df489e10ebfd88c134f/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "College Park, United States",
+      "country": "US",
+      "slug": "lysraderr-lululemon-speed-up-shorts-size-90a7",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "blue"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 34295179
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "6",
+          "id": 8,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "6"
+        }
+      ],
+      "preview": {
+        "id": 4418476904,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/27444767/4418476904_f1c38b0fae834a39ad2ac2bb0984e83e/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 40,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "17.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "17.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "17.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "17.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 845596394,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "VINTAGE Lululemon Speed Up Shorts 2.5\" Gray Heather with Black Waistband #athletic #running",
+      "pictures": [
+        {
+          "id": 4329021510,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/355190058/4329021510_371c8a464df14ee49c69bdfb33ecb37f/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4329023742,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/355190058/4329023742_097dc013062b44de9a8823d447f229cc/P0.jpg"
+            }
+          },
+          "original_width": 878,
+          "original_height": 878,
+          "is_square": true
+        },
+        {
+          "id": 4329024236,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/355190058/4329024236_cdedced18c6d44ffbcc70f85c3e83e5d/P0.jpg"
+            }
+          },
+          "original_width": 793,
+          "original_height": 793,
+          "is_square": true
+        },
+        {
+          "id": 4329023948,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/355190058/4329023948_3f59a6dccbf648cb93e5c48de6620f1a/P0.jpg"
+            }
+          },
+          "original_width": 959,
+          "original_height": 1278,
+          "is_square": false
+        },
+        {
+          "id": 4329024705,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/355190058/4329024705_8723a527454f4e55ba152beac65f20ff/P0.jpg"
+            }
+          },
+          "original_width": 720,
+          "original_height": 960,
+          "is_square": false
+        }
+      ],
+      "location": "Sterling, United States",
+      "country": "US",
+      "discount_percentage": 44,
+      "slug": "camisdloset__-vintage-lululemon-speed-up-shorts-e5e0",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 10,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "8"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "grey"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "small",
+        "payer": "buyer",
+        "ship_from": 44434570
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "8",
+          "id": 10,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "8"
+        }
+      ],
+      "preview": {
+        "id": 4329021510,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/355190058/4329021510_371c8a464df14ee49c69bdfb33ecb37f/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 5,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "45.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "45.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "discounted_price": {
+          "total_price": "25.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "25.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": true,
+        "final_price_key": "discounted_price",
+        "discount_percentage": 44.44444444444444
+      }
+    },
+    {
+      "id": 864336948,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon heather grey and black speed up shorts size 8 2.5 inch inseam regular waist\n\nWore once to try on but too big so I'm repopping \n\nSelling for what I paid in total\n\n #athletic #activewear #lululemon #speedup #shorts",
+      "pictures": [
+        {
+          "id": 4430641221,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/392273453/4430641221_3eaf84e4fb084f1ead9ac720bf114da6/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4430640240,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/392273453/4430640240_df0185337a0349b0aba957bcf1619d91/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4430634986,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/392273453/repop_334959945_4334295548/4430634986_b2354341d08348fdaa02eae257b3a2ea/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4430639373,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/392273453/4430639373_5567eadf240940209697e21ea583b674/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        },
+        {
+          "id": 4430641421,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/b1/392273453/4430641421_2f386115abe04500a99214a15cc705df/P0.jpg"
+            }
+          },
+          "original_width": 1280,
+          "original_height": 1280,
+          "is_square": true
+        }
+      ],
+      "location": "Atlanta, United States",
+      "country": "US",
+      "slug": "ella0_l04-lululemon-gray-heathered-speed-up-9475",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 10,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "8"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "purple",
+          "multi"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts",
+        "repop_metadata": {
+          "original_product_id": 846591210,
+          "original_seller_id": 334959945,
+          "purchase_item_id": 311721335
+        }
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 42710477
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-12T22:13:49.001141Z",
+      "sizes": [
+        {
+          "name": "8",
+          "id": 10,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "8"
+        }
+      ],
+      "preview": {
+        "id": 4430641221,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/b1/392273453/4430641221_3eaf84e4fb084f1ead9ac720bf114da6/P0.jpg"
+          }
+        },
+        "original_width": 1280,
+        "original_height": 1280,
+        "is_square": true
+      },
+      "like_count": 12,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "16.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "16.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "16.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "16.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 863434415,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon Speed Up high rise Shorts 2.5\nColor: Black\nUnderwear line cut out inside \n#activewear #lululemon #speedup\n\nDm before buying",
+      "pictures": [
+        {
+          "id": 4425601347,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/324635936/4425601347_a28ede231f7544cb93d13b19703c6fb1/P0.jpg"
+            }
+          },
+          "original_width": 719,
+          "original_height": 960,
+          "is_square": false
+        },
+        {
+          "id": 4425601948,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/324635936/4425601948_91d2962930af48c896a22db1032f5530/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Sterling Heights, United States",
+      "country": "US",
+      "slug": "mmmsclotuing-lululemon-speed-up-high-rise-9a6e",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 2,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "0"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 36769340
+      },
+      "is_boosted": false,
+      "boosted_at": "2026-08-13T23:37:40.662889Z",
+      "sizes": [
+        {
+          "name": "0",
+          "id": 2,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "0"
+        }
+      ],
+      "preview": {
+        "id": 4425601347,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/324635936/4425601347_a28ede231f7544cb93d13b19703c6fb1/P0.jpg"
+          }
+        },
+        "original_width": 719,
+        "original_height": 960,
+        "is_square": false
+      },
+      "like_count": 5,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 859710333,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "Lululemon speedups size 2 2.5in low rise #lululemon",
+      "pictures": [
+        {
+          "id": 4405524954,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/235632465/4405524954_41e76b527efb4020914b1d6bf1892321/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4405526211,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/235632465/4405526211_9ab04af00b8247879daf4adffe80c1ea/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Houston, United States",
+      "country": "US",
+      "slug": "ellielohsl-lululemon-speedups-size-2-25in-4a6d",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_excellent",
+        "colour": [
+          "multi",
+          "purple"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "under_4oz",
+        "payer": "buyer",
+        "ship_from": 29545111
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "2",
+          "id": 4,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "2"
+        }
+      ],
+      "preview": {
+        "id": 4405524954,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/235632465/4405524954_41e76b527efb4020914b1d6bf1892321/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 7,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "20.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "20.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    },
+    {
+      "id": 858453867,
+      "brand_id": 295,
+      "brand_name": "Lululemon",
+      "active_status": "active",
+      "status": "STATUS_ONSALE",
+      "category_name": "Shorts",
+      "description": "lululemon speed up shorts\n4in size: size:12 great condition\n\n#lululemon #speedup #summer #gym",
+      "pictures": [
+        {
+          "id": 4398120063,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/51188862/4398120063_16e232bcc844432c98a73ff3ff5b9a81/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4398121014,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/51188862/4398121014_b445158cc2e6470aadb959ecb97ec6ff/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4398121322,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/51188862/4398121322_5330e129604744ed9826ce73cda596a8/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        },
+        {
+          "id": 4398119954,
+          "formats": {
+            "P0": {
+              "height": 1280,
+              "width": 1280,
+              "url": "https://media-photos.depop.com/r1/51188862/4398119954_44205f7943d541db8f315959203c883a/P0.jpg"
+            }
+          },
+          "original_width": 960,
+          "original_height": 1280,
+          "is_square": false
+        }
+      ],
+      "location": "Houston, United States",
+      "country": "US",
+      "slug": "keniclose5t-lululemon-speed-up-shorts-4in-4bfa",
+      "variant_set_id": 22,
+      "variants_all": [
+        {
+          "id": 14,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "12"
+        }
+      ],
+      "listed_quantity": 1,
+      "attributes": {
+        "condition": "used_like_new",
+        "colour": [
+          "yellow",
+          "green"
+        ],
+        "brand": "lululemon",
+        "gender": "female",
+        "is_kids": false,
+        "group": "bottoms",
+        "product_type": "shorts"
+      },
+      "shipping_method": {
+        "shipping_id": "USPS",
+        "parcel_size": "small",
+        "payer": "buyer",
+        "ship_from": 47220443
+      },
+      "is_boosted": false,
+      "sizes": [
+        {
+          "name": "12",
+          "id": 14,
+          "quantity": 1,
+          "status": "STATUS_ONSALE",
+          "variant": "12"
+        }
+      ],
+      "preview": {
+        "id": 4398120063,
+        "formats": {
+          "P0": {
+            "height": 1280,
+            "width": 1280,
+            "url": "https://media-photos.depop.com/r1/51188862/4398120063_16e232bcc844432c98a73ff3ff5b9a81/P0.jpg"
+          }
+        },
+        "original_width": 960,
+        "original_height": 1280,
+        "is_square": false
+      },
+      "like_count": 14,
+      "pricing": {
+        "currency": "USD",
+        "currency_name": "USD",
+        "current_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "original_price": {
+          "total_price": "15.00",
+          "price_breakdown": {
+            "price": {
+              "amount": "15.00"
+            },
+            "buyer_fee": {
+              "amount": "0.00"
+            },
+            "tax": {
+              "amount": "0.00",
+              "tax_type": "n/a"
+            },
+            "shipping": {
+              "amount": "1.99",
+              "shipping_boundary": "NATIONAL",
+              "shipping_id": "USPS"
+            }
+          }
+        },
+        "total_price_components": {
+          "buyer_fee": false,
+          "shipping_price": false,
+          "tax": false
+        },
+        "is_reduced": false,
+        "final_price_key": "original_price"
+      }
+    }
+  ]
+}
