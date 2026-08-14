@@ -5,18 +5,18 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 0 — Repo setup
 
-- [ ] Create repo `depop-pinger` (private or public — public is fine/free
+- [x] Create repo `depop-pinger` (private or public — public is fine/free
       for GitHub Actions, same as ticket-sniper, but keep any API keys out
       of it regardless).
-- [ ] `requirements.txt`: `requests` (add more only if the chosen data
+- [x] `requirements.txt`: `requests` (add more only if the chosen data
       source needs a specific client library).
-- [ ] `.env.example` documenting expected environment variables:
+- [x] `.env.example` documenting expected environment variables:
       `NTFY_TOPIC`, and `SCRAPER_API_KEY` if Phase 2 goes with option 2.
-- [ ] `.gitignore`: `.env`, `__pycache__/`.
+- [x] `.gitignore`: `.env`, `__pycache__/`.
 
 ## Phase 1 — config.py
 
-- [ ] Define constants:
+- [x] Define constants:
   - `SEARCH_QUERY = "lululemon speedup shorts"`
   - `TARGET_SIZES = []` — **placeholder, to be filled in after Timas talks
     to his girlfriend about exact sizes**
@@ -24,7 +24,7 @@ should leave the repo in a working, testable state before moving to the next.
   - `POLL_INTERVAL_SECONDS = 90` (informational only if running on GitHub
     Actions cron — cron interval is set in the workflow file instead)
   - `NTFY_TOPIC` read from environment
-- [ ] Add a comment block explaining exactly how to fill in `TARGET_SIZES`
+- [x] Add a comment block explaining exactly how to fill in `TARGET_SIZES`
       and `MAX_PRICE` once confirmed, so this file is self-documenting for
       non-technical edits later (his girlfriend may want to tweak criteria
       herself).
