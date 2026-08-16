@@ -2,7 +2,7 @@
 
 Authoritative current state. Read this first; refresh at session end.
 
-## Current state (as of 2026-08-14 ~11:15 ET)
+## Current state (as of 2026-08-15)
 
 Phases 0 through 6 complete and committed; Phase 7 half done. All code is
 built, unit tested (19/19 passing), and verified against live Depop:
@@ -18,26 +18,36 @@ parses the embedded Next.js RSC payload. Schema details, size/price field
 mapping, and the `sort=newest` best-effort caveat are all in that module's
 docstring. No Cloudflare challenges seen across ~30 dev requests.
 
-## What's blocked and on whom
+## Next steps, in order
 
-All remaining work needs Timas, in this order:
+1. **Timas works through `TODO.md`** (subscribe to the ntfy topic from the
+   local gitignored `.env`, confirm `python notifier.py` lands a push on
+   the phone, `gh auth login` + set the `NTFY_TOPIC` repo secret, trigger
+   one manual workflow run). Ticks the last Phase 5 and Phase 7 boxes in
+   PLAN.md when done. Until the secret exists, any cron run that finds a
+   new listing FAILS loudly (red X) rather than alerting.
+2. **Timas sends `CRITERIA.md` to the expert (girlfriend)** and gets it
+   back with the answers filled in under each question. That completed
+   document is the authoritative spec for what to target.
+3. **Next Claude session translates the completed CRITERIA.md into code**
+   (this replaces the old bare "fill in TARGET_SIZES/MAX_PRICE" Phase 8):
+   - Sizes and max price map directly onto `TARGET_SIZES` / `MAX_PRICE`
+     in config.py (sizes come through as plain numbers like "2", "4").
+   - IMPORTANT for that session: several CRITERIA.md answers go beyond
+     what filters.py currently supports (it only does size + price).
+     Keyword include/exclude lists (Q1-3, dupes/other models), inseam and
+     rise (Q4-5), color (Q12), condition/liner dealbreakers (Q13-15), and
+     US-only (Q16) all need NEW filter logic on the listing description
+     text, plus possibly widening/adding search queries in config.py.
+     Scope that as a Phase 9 in PLAN.md before coding it, keep new
+     criteria as config.py constants, unit test against the fixture.
+4. **Go live and tune**: commit the criteria, watch the first days of
+   alerts, tighten keywords if pings are spammy or widen if listings are
+   being missed (the alert-vs-miss tradeoff choices are in CRITERIA.md
+   answers, e.g. Q8 unknown sizes, Q12 color option a/b).
 
-1. Subscribe to the ntfy topic in the ntfy app on his phone. The topic
-   value is in the local gitignored `.env` (treated as a secret, not
-   written in repo docs).
-2. Run `python notifier.py` locally, confirm the test push lands on the
-   phone (Phase 5 last checkbox).
-3. `gh auth login`, then `gh secret set NTFY_TOPIC` with that same value
-   (or add it via GitHub web UI: repo Settings > Secrets and variables >
-   Actions). Until this exists, any cron run that finds a new listing will
-   FAIL loudly (ValueError on missing NTFY_TOPIC) rather than alert.
-4. Trigger one manual workflow run (`gh workflow run check_listings.yml`
-   or the Actions tab) and confirm green (Phase 7 last checkbox).
-5. Fill in `TARGET_SIZES` / `MAX_PRICE` in config.py with the real sizes
-   from his girlfriend (Phase 8). Until then criteria are wide open:
-   every listing for the query matches (fine for testing, spammy for real
-   use). Depop sizes for these listings come through as plain numbers like
-   "2", "4", "6".
+Until criteria are in, config is wide open: every listing for the query
+matches (fine for testing, spammy for real use).
 
 ## Standing cautions
 
