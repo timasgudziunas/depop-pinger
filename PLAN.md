@@ -73,9 +73,7 @@ should leave the repo in a working, testable state before moving to the next.
       var) with title, price, size, and link — mirror the notifier pattern
       from ticket-sniper. *(Click header opens the listing; Attach header
       shows the item photo.)*
-- [ ] Manual test: trigger one fake alert, confirm it lands on phone.
-      *(blocked — waiting on Timas to pick/provide an NTFY_TOPIC; then run
-      `python notifier.py` with the topic set and confirm on phone.)*
+- [x] Manual test: trigger one fake alert, confirm it lands on phone.
 
 ## Phase 6 — tracker.py (orchestration)
 
@@ -98,18 +96,20 @@ should leave the repo in a working, testable state before moving to the next.
       Python, install deps, run `tracker.py` with secrets injected, commit
       updated `seen_listings.json` back to the repo. *(Went with */5 since
       listings sell within minutes; relax to */15 if runs pile up.)*
-- [ ] Add `NTFY_TOPIC` (and `SCRAPER_API_KEY` if applicable) as GitHub
-      Actions repo secrets. *(blocked — gh CLI not logged in on this
-      machine; run `gh auth login`, then
-      `gh secret set NTFY_TOPIC` with the topic from local .env.)*
-- [ ] Trigger a manual workflow run to confirm end-to-end before relying on
-      the schedule. *(blocked — same gh auth prerequisite, plus push.)*
+- [x] Add `NTFY_TOPIC` (and `SCRAPER_API_KEY` if applicable) as GitHub
+      Actions repo secrets.
+- [x] Trigger a manual workflow run to confirm end-to-end before relying on
+      the schedule.
 
 ## Phase 8 — Fill in real criteria and go live
 
-- [ ] Once Timas has the exact sizes (and optional price ceiling) from his
+- [x] Once Timas has the exact sizes (and optional price ceiling) from his
       girlfriend, fill in `TARGET_SIZES` / `MAX_PRICE` in `config.py`,
-      commit, and let the schedule run for real.
+      commit, and let the schedule run for real. *(Real criteria from
+      CRITERIA.md, filled in 2026-08-17: TARGET_SIZES 0/2/XS/XXS,
+      MAX_PRICE 25.0, plus new REQUIRED_KEYWORDS / EXCLUDED_TERMS /
+      ALLOWED_CONDITIONS / ALLOWED_COUNTRIES filters added to config.py and
+      filters.py — see filters.py for the full check list.)*
 - [ ] Optional follow-up: expand `SEARCH_QUERY` to catch listing title
       variants (e.g. "lulu speedup", "align speed up") if early runs show
       missed matches.

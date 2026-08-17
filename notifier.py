@@ -12,6 +12,16 @@ logger = logging.getLogger(__name__)
 NTFY_BASE_URL = "https://ntfy.sh"
 REQUEST_TIMEOUT_SECONDS = 10
 
+_CURRENCY_SYMBOLS = {"USD": "$", "GBP": "£", "EUR": "€"}
+
+
+def _format_price(price: float, currency: str) -> str:
+    """25.0/'USD' -> '$25', 23.5/'USD' -> '$23.50'. Currencies without a
+    known symbol fall back to '25 XXX' so the amount is never ambiguous."""
+    amount = f"{price:.2f}".removesuffix(".00")
+    symbol = _CURRENCY_SYMBOLS.get(currency)
+    return f"{symbol}{amount}" if symbol else f"{amount} {currency}"
+
 
 def send_alert(listing: dict) -> bool:
     """POST a push notification for listing to ntfy.sh. Returns True on success.
@@ -25,7 +35,7 @@ def send_alert(listing: dict) -> bool:
 
     body_lines = [
         listing["title"],
-        f"{listing['price']} {listing['currency']}",
+        _format_price(listing["price"], listing["currency"]),
     ]
     if listing.get("size"):
         body_lines.append(f"Size: {listing['size']}")
@@ -61,12 +71,15 @@ if __name__ == "__main__":
     sys.stdout.reconfigure(encoding="utf-8")
     logging.basicConfig(level=logging.INFO)
 
+    # Mirrors what depop_client._normalize_product actually returns for a
+    # US-region search: USD currency, plain size-chart size string (no "UK"
+    # prefix). Price is deliberately non-whole to exercise the cents path.
     fake_listing = {
         "id": "test-123",
         "title": "Lululemon Speedup Shorts 4\" 🩳",
-        "price": 25.0,
-        "currency": "GBP",
-        "size": "UK 8",
+        "price": 23.5,
+        "currency": "USD",
+        "size": "4",
         "url": "https://www.depop.com/products/example-listing/",
         "image_url": "https://example.com/image.jpg",
     }

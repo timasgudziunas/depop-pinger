@@ -42,6 +42,15 @@ EXCLUDING shipping, which is broken out separately under
 `pricing.current_price.price_breakdown.shipping`). We use `total_price` as
 the normalized `price` since it's what Depop displays as the item's price.
 
+What the API exposes about COUNTRY/CONDITION/KIDS (verified empirically
+against tests/fixtures/search_response.json): each product object has a
+top-level `country` string (e.g. "US") and an `attributes` object carrying
+`attributes.condition` (enum values observed: `brand_new`,
+`used_like_new`, `used_excellent`, `used_good`) and `attributes.is_kids`
+(bool). Every fixture object had `attributes` populated, but it's guarded
+with `.get(...) or {}` regardless since it isn't a field we've seen Depop
+document or guarantee.
+
 Gotchas:
   - No `title` field exists. Depop listings only have a free-text
     `description` (what sellers type, often including hashtags) — that IS
@@ -116,10 +125,12 @@ def fetch_listings(query: str) -> list[dict]:
 
     Returns a list of normalized dicts with keys: id (str), title (str),
     price (float), currency (str), size (str or None), url (str),
-    image_url (str or None). Sorted best-effort newest-first (see module
-    docstring). Returns an empty list on transient network errors (logged)
-    or on a genuine zero-result search. Raises DepopResponseSchemaError if
-    Depop's response no longer matches the expected shape.
+    image_url (str or None), country (str or None), condition (str or
+    None), is_kids (bool or None). Sorted best-effort newest-first (see
+    module docstring). Returns an empty list on transient network errors
+    (logged) or on a genuine zero-result search. Raises
+    DepopResponseSchemaError if Depop's response no longer matches the
+    expected shape.
     """
     html = _fetch_search_html(query)
     if html is None:
@@ -305,6 +316,8 @@ def _normalize_product(obj: dict) -> dict:
         if pictures:
             image_url = pictures[0].get("formats", {}).get("P0", {}).get("url")
 
+    attributes = obj.get("attributes") or {}
+
     return {
         "id": str(obj["id"]),
         "title": obj.get("description") or "",
@@ -313,6 +326,9 @@ def _normalize_product(obj: dict) -> dict:
         "size": size,
         "url": f"https://www.depop.com/products/{obj['slug']}/",
         "image_url": image_url,
+        "country": obj.get("country"),
+        "condition": attributes.get("condition"),
+        "is_kids": attributes.get("is_kids"),
     }
 
 
