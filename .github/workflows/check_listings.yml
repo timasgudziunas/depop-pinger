@@ -1,15 +1,21 @@
 name: Check Depop listings
 
+# HOSTING RETIRED 2026-08-17: every scheduled run since going live on
+# 2026-08-15 (100/100 sampled) was Cloudflare-403-blocked — GitHub's
+# datacenter IPs can't reach depop.com's search page at all. The pinger now
+# runs locally via Windows Task Scheduler (see setup_task.ps1); the cron
+# trigger is removed. workflow_dispatch is kept ONLY as a manual probe to
+# re-test whether GitHub IPs are still blocked ("Checked 0 listings" + a
+# 403 warning in the log = still blocked). State is no longer committed
+# back (seen_listings.json is local-only and gitignored), so a probe run
+# that somehow got through could re-alert on listings the local pinger
+# already caught — acceptable for a rare manual test.
+
 on:
-  schedule:
-    # Every 5 minutes: GitHub's minimum, chosen because matching listings
-    # sell within minutes. Real-world cron delivery is delayed 3-15 min on
-    # busy runners; if runs pile up or get skipped, relax to */15.
-    - cron: "*/5 * * * *"
   workflow_dispatch: {}
 
 permissions:
-  contents: write # commit updated seen_listings.json back to the repo
+  contents: read
 
 concurrency:
   group: check-listings
@@ -29,18 +35,7 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run tracker
+      - name: Run tracker (probe)
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
         run: python tracker.py
-
-      - name: Commit updated state
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          if ! git diff --quiet seen_listings.json; then
-            git add seen_listings.json
-            git commit -m "update seen listings [skip ci]"
-            git pull --rebase origin main
-            git push
-          fi

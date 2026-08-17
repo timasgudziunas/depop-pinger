@@ -1,3 +1,8 @@
 .env
 __pycache__/
 *.pyc
+.venv/
+data/
+# State is local-only since the 2026-08-17 move to Task Scheduler hosting
+# (was previously committed back by the GitHub Actions cron).
+seen_listings.json

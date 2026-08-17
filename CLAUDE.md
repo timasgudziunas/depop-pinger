@@ -60,13 +60,25 @@ depop-pinger/
 ├── state.py                # tracks which listing IDs have already been alerted on
 ├── notifier.py             # sends ntfy.sh push notifications
 ├── tracker.py               # orchestrates: fetch -> filter -> dedupe -> notify -> save state
-├── seen_listings.json      # persisted state, committed back by the Action each run
+├── setup_task.ps1          # registers the local Task Scheduler task (the real scheduler)
+├── seen_listings.json      # persisted state, local-only + gitignored (since 2026-08-17)
 ├── requirements.txt
 ├── .env.example
 └── .github/
     └── workflows/
-        └── check_listings.yml   # cron schedule, checkout+commit state, run tracker.py
+        └── check_listings.yml   # manual probe only — see Scheduling below
 ```
+
+## Scheduling (changed 2026-08-17)
+
+The pinger runs locally via Windows Task Scheduler (`\DepopPinger\Check
+Listings`, every 2 minutes, registered by `setup_task.ps1`), NOT on GitHub
+Actions. The original Actions cron never worked: every scheduled run from
+2026-08-15 to 2026-08-17 was Cloudflare-403-blocked because depop.com
+blocks datacenter IPs. Residential IPs are fine. The workflow file is kept
+as a `workflow_dispatch`-only probe for re-testing whether GitHub IPs are
+still blocked. Do not re-enable the cron without confirming the probe
+fetches listings.
 
 ## Conventions
 

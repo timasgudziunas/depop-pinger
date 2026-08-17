@@ -6,6 +6,8 @@ Exits non-zero on unhandled errors so Actions surfaces failures.
 
 import logging
 import sys
+from logging.handlers import RotatingFileHandler
+from pathlib import Path
 
 import config
 import depop_client
@@ -13,7 +15,22 @@ import filters
 import notifier
 import state
 
-logging.basicConfig(level=logging.INFO)
+# Scheduled-task runs are headless, so mirror everything to a local log
+# file. force=True replaces the stdout-only config the imported modules
+# already installed at import time.
+_LOG_DIR = Path(__file__).with_name("data") / "logs"
+_LOG_DIR.mkdir(parents=True, exist_ok=True)
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)s %(name)s %(message)s",
+    handlers=[
+        logging.StreamHandler(sys.stdout),
+        RotatingFileHandler(
+            _LOG_DIR / "tracker.log", maxBytes=1_000_000, backupCount=2, encoding="utf-8"
+        ),
+    ],
+    force=True,
+)
 logger = logging.getLogger(__name__)
 
 

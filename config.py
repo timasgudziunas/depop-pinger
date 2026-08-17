@@ -13,6 +13,18 @@ Real criteria filled in from CRITERIA.md, 2026-08-17.
 """
 
 import os
+from pathlib import Path
+
+# Local runs (Task Scheduler fires tracker.py with no shell profile) get
+# their env vars from the gitignored .env file next to this module; GitHub
+# Actions injects secrets directly. Already-set environment always wins.
+_env_file = Path(__file__).with_name(".env")
+if _env_file.exists():
+    for _line in _env_file.read_text(encoding="utf-8").splitlines():
+        _line = _line.strip()
+        if _line and not _line.startswith("#") and "=" in _line:
+            _key, _, _value = _line.partition("=")
+            os.environ.setdefault(_key.strip(), _value.strip())
 
 # What to search Depop for.
 SEARCH_QUERY = "lululemon speedup shorts"
@@ -56,8 +68,9 @@ ALLOWED_CONDITIONS: list[str] = ["brand_new", "used_like_new", "used_excellent"]
 # Seller countries to alert on. A listing with no country field passes.
 ALLOWED_COUNTRIES: list[str] = ["US", "CA"]
 
-# Informational when running on GitHub Actions cron (the real interval lives
-# in .github/workflows/check_listings.yml). Used only if run as a local loop.
+# Informational only: the real cadence lives in setup_task.ps1 (Task
+# Scheduler repetition interval, 2 min as of 2026-08-17). Used only if
+# tracker.py is ever run as a manual local loop.
 POLL_INTERVAL_SECONDS = 90
 
 # Days to keep listing IDs in seen_listings.json before pruning.

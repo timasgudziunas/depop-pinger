@@ -90,6 +90,11 @@ should leave the repo in a working, testable state before moving to the next.
 
 ## Phase 7 — GitHub Actions
 
+*(RETIRED 2026-08-17: GitHub runner IPs are Cloudflare-blocked by
+depop.com — every cron run got HTTP 403 and fetched nothing. Hosting
+moved to a local Task Scheduler task (`setup_task.ps1`, every 2 min);
+the workflow remains as a manual dispatch probe. See HANDOFF.md.)*
+
 - [x] `.github/workflows/check_listings.yml`: cron schedule (every 5–15 min
       — same constraint as ticket-sniper: 5 min is GitHub's minimum, 15 min
       is the friendlier default for a public repo), checkout, set up
