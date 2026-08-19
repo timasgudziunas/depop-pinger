@@ -68,9 +68,9 @@ ALLOWED_CONDITIONS: list[str] = ["brand_new", "used_like_new", "used_excellent"]
 # Seller countries to alert on. A listing with no country field passes.
 ALLOWED_COUNTRIES: list[str] = ["US", "CA"]
 
-# Informational only: the real cadence lives in setup_task.ps1 (Task
-# Scheduler repetition interval, 2 min as of 2026-08-17). Used only if
-# tracker.py is ever run as a manual local loop.
+# Informational only: the real cadence lives in
+# .github/workflows/check_listings.yml (cron, every 10 min as of
+# 2026-08-19). Used only if tracker.py is ever run as a manual local loop.
 POLL_INTERVAL_SECONDS = 90
 
 # Days to keep listing IDs in seen_listings.json before pruning.
@@ -78,3 +78,16 @@ SEEN_RETENTION_DAYS = 14
 
 # ntfy.sh topic — set via environment (GitHub Actions secret / local .env).
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")
+
+# Bright Data API token for the Web Unlocker scraper API (free tier: 5,000
+# requests/month). Empty = fetch depop.com directly (works on residential
+# IPs only; datacenter IPs are Cloudflare-blocked).
+SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY", "")
+
+# Bright Data zone name of the Web Unlocker zone.
+SCRAPER_ZONE = os.environ.get("BRIGHTDATA_ZONE", "web_unlocker1")
+
+# Where full alert content is appended (one JSON object per line) so past
+# pings can be reviewed later. Tracked in git; the Actions cron commits it
+# back after each run that alerts.
+ALERTS_HISTORY_PATH = Path(__file__).with_name("alerts_history.jsonl")

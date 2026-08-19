@@ -1,7 +1,9 @@
 """Sends ntfy.sh push notifications for matched Depop listings."""
 
+import json
 import logging
 import sys
+from datetime import datetime, timezone
 
 import requests
 
@@ -60,11 +62,41 @@ def send_alert(listing: dict) -> bool:
             timeout=REQUEST_TIMEOUT_SECONDS,
         )
         response.raise_for_status()
-        logger.info("Alert sent for listing %s", listing.get("id"))
+        logger.info(
+            "Alert sent: id=%s title=%r price=%s size=%s url=%s",
+            listing.get("id"),
+            listing.get("title"),
+            _format_price(listing["price"], listing["currency"]),
+            listing.get("size"),
+            listing.get("url"),
+        )
+        _append_history(listing)
         return True
     except requests.RequestException as e:
         logger.error("Failed to send alert for listing %s: %s", listing.get("id"), e)
         return False
+
+
+def _append_history(listing: dict) -> None:
+    """Append one JSON line recording this alert to
+    config.ALERTS_HISTORY_PATH. Best-effort: the push already succeeded, so
+    a failure to write history is logged and swallowed rather than making
+    send_alert report failure."""
+    record = {
+        "sent_at": datetime.now(timezone.utc).isoformat(),
+        "id": listing.get("id"),
+        "title": listing.get("title"),
+        "price": listing.get("price"),
+        "currency": listing.get("currency"),
+        "size": listing.get("size"),
+        "url": listing.get("url"),
+        "image_url": listing.get("image_url"),
+    }
+    try:
+        with open(config.ALERTS_HISTORY_PATH, "a", encoding="utf-8") as f:
+            f.write(json.dumps(record, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        logger.error("Failed to write alert history for listing %s: %s", listing.get("id"), exc)
 
 
 if __name__ == "__main__":

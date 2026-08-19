@@ -38,17 +38,20 @@ anything new → persist state → repeat via GitHub Actions cron.
 1. **Depop's own search — mimicked as a browser request.** Same approach
    Depop's own web app uses when you search on depop.com. Free, but brittle:
    response shape can change without notice and may get rate-limited or
-   Cloudflare-challenged under sustained polling.
-2. **Third-party scraper API** (e.g. ScrapeBadger, Apify Depop actors,
-   Retailed) that handles Cloudflare/proxies for you and returns structured
-   JSON (query, brand, size, price filters built in). Usually has a free
-   tier sufficient for personal polling volume; more resilient than #1 but
-   adds an external dependency and possibly a paid API key.
+   Cloudflare-challenged under sustained polling. Used as the local fallback
+   fetch path when `SCRAPER_API_KEY` is unset (works on residential IPs
+   only).
+2. **Third-party scraper API — LIVE as of 2026-08-19.** `depop_client.py`
+   routes through Bright Data's Web Unlocker API when `SCRAPER_API_KEY` is
+   set: it handles Cloudflare on Depop's behalf and returns the same raw
+   page HTML a browser would get, so the existing RSC parsing is untouched.
+   Free tier: 5,000 requests/month, 1 credit per successful request, failed
+   requests not charged. This is what made GitHub Actions hosting viable
+   again (see Scheduling below) — GitHub's datacenter IPs are Cloudflare-
+   blocked hitting depop.com directly, but Bright Data's IPs aren't.
 
-Default recommendation: start with option 1 for simplicity; if it proves
-unreliable (frequent blocks/empty responses), swap in option 2 without
-changing the rest of the architecture — `depop_client.py` should be the only
-file that needs to change.
+`depop_client.py` remains the only file that needs to change if the
+transport is swapped again.
 
 ## Repo structure
 
@@ -60,25 +63,30 @@ depop-pinger/
 ├── state.py                # tracks which listing IDs have already been alerted on
 ├── notifier.py             # sends ntfy.sh push notifications
 ├── tracker.py               # orchestrates: fetch -> filter -> dedupe -> notify -> save state
-├── setup_task.ps1          # registers the local Task Scheduler task (the real scheduler)
-├── seen_listings.json      # persisted state, local-only + gitignored (since 2026-08-17)
+├── setup_task.ps1          # registers the local Task Scheduler task (deprecated, see Scheduling)
+├── seen_listings.json      # persisted state, tracked in git again (committed back by Actions)
+├── alerts_history.jsonl    # tracked, full content of every ping ever sent (one JSON obj/line)
 ├── requirements.txt
 ├── .env.example
 └── .github/
     └── workflows/
-        └── check_listings.yml   # manual probe only — see Scheduling below
+        └── check_listings.yml   # the real scheduler again — see Scheduling below
 ```
 
-## Scheduling (changed 2026-08-17)
+## Scheduling (changed 2026-08-19)
 
-The pinger runs locally via Windows Task Scheduler (`\DepopPinger\Check
-Listings`, every 2 minutes, registered by `setup_task.ps1`), NOT on GitHub
-Actions. The original Actions cron never worked: every scheduled run from
-2026-08-15 to 2026-08-17 was Cloudflare-403-blocked because depop.com
-blocks datacenter IPs. Residential IPs are fine. The workflow file is kept
-as a `workflow_dispatch`-only probe for re-testing whether GitHub IPs are
-still blocked. Do not re-enable the cron without confirming the probe
-fetches listings.
+Hosting moved BACK to GitHub Actions cron (`.github/workflows/check_listings.yml`,
+every 10 minutes) as of 2026-08-19, now that `depop_client.py` fetches
+through Bright Data Web Unlocker instead of hitting depop.com directly —
+GitHub's datacenter IPs never touch depop.com anymore, so the 2026-08-17
+Cloudflare 403 blocks that forced the move to local hosting no longer
+apply. The workflow commits `seen_listings.json` and `alerts_history.jsonl`
+back to the repo after each run.
+
+The local Windows Task Scheduler task (`\DepopPinger\Check Listings`,
+registered by `setup_task.ps1`) is deprecated and still exists only until
+the Actions cron is confirmed green for a few days; disable it once
+verified so the two runners don't double-alert.
 
 ## Conventions
 

@@ -1,21 +1,23 @@
 name: Check Depop listings
 
-# HOSTING RETIRED 2026-08-17: every scheduled run since going live on
-# 2026-08-15 (100/100 sampled) was Cloudflare-403-blocked — GitHub's
-# datacenter IPs can't reach depop.com's search page at all. The pinger now
-# runs locally via Windows Task Scheduler (see setup_task.ps1); the cron
-# trigger is removed. workflow_dispatch is kept ONLY as a manual probe to
-# re-test whether GitHub IPs are still blocked ("Checked 0 listings" + a
-# 403 warning in the log = still blocked). State is no longer committed
-# back (seen_listings.json is local-only and gitignored), so a probe run
-# that somehow got through could re-alert on listings the local pinger
-# already caught — acceptable for a rare manual test.
+# HOSTING MOVED BACK to GitHub Actions 2026-08-19: the fetch layer now goes
+# through Bright Data Web Unlocker (depop_client.py), so GitHub's datacenter
+# IPs never touch depop.com directly anymore -- the 2026-08-17 Cloudflare
+# 403 blocks that forced the move to local Task Scheduler no longer apply.
+# Cron is */10 (6 runs/hour, 4,464/month at 744 hours in a 31-day month)
+# because Bright Data's Web Unlocker free tier is 5,000 requests/month --
+# this keeps a safety margin under that cap. GitHub cron is best-effort:
+# scheduled runs can fire late, especially at peak times. The state
+# commit-back step below also keeps this repo active, which prevents
+# GitHub's 60-day-inactivity auto-disable from ever triggering on this cron.
 
 on:
+  schedule:
+    - cron: "*/10 * * * *"
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: check-listings
@@ -27,6 +29,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - uses: actions/setup-python@v5
         with:
@@ -35,7 +39,29 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
-      - name: Run tracker (probe)
+      # Without the scraper API key the fetch falls back to hitting depop.com
+      # directly, which is Cloudflare-403-blocked from GitHub's IPs -- the run
+      # would show green while fetching nothing (the exact silent failure mode
+      # that killed the original Actions hosting). Fail loudly instead.
+      - name: Fail if SCRAPER_API_KEY secret is missing
+        env:
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+        run: |
+          if [ -z "$SCRAPER_API_KEY" ]; then
+            echo "::error::SCRAPER_API_KEY secret is not set. Add the Bright Data API token as a repo secret -- without it this run cannot fetch listings from a datacenter IP."
+            exit 1
+          fi
+
+      - name: Run tracker
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+          BRIGHTDATA_ZONE: ${{ vars.BRIGHTDATA_ZONE || 'web_unlocker1' }}
         run: python tracker.py
+
+      - name: Commit state back
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add seen_listings.json alerts_history.jsonl
+          git diff --cached --quiet || (git commit -m "update pinger state [auto]" && git pull --rebase && git push)

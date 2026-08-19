@@ -27,6 +27,19 @@ alone can't safely extract nested JSON) rather than calling a separate API
 endpoint. This IS "mimicking the browser request" in spirit: it's the exact
 HTML response depop.com's own frontend consumes to hydrate the page.
 
+Fetch transport (CLAUDE.md "data source option 2", live as of 2026-08-19):
+when `config.SCRAPER_API_KEY` is set, the search page is fetched through
+Bright Data's Web Unlocker API (`https://api.brightdata.com/request`) — a
+commercial scraper API that handles Cloudflare on Depop's behalf and hands
+back the same raw page HTML a browser would get (free tier: 5,000
+requests/month, 1 credit per successful request, failed requests not
+charged, verified 2026-08-19). This is what makes GitHub Actions-hosted
+polling viable again: GitHub's datacenter IPs are Cloudflare-blocked when
+hitting depop.com directly. When `SCRAPER_API_KEY` is unset, the module
+falls back to the original direct `requests.get` against depop.com (works
+on residential IPs only). Either way, the RSC parsing below is unchanged —
+Web Unlocker returns the same page HTML depop.com serves directly.
+
 What the API exposes about SIZE (verified empirically): each product object
 has a `sizes` array, e.g. `[{"name": "4", "id": 6, "quantity": 1,
 "status": "STATUS_ONSALE", "variant": "4"}]`. In every listing observed
@@ -85,8 +98,11 @@ from __future__ import annotations
 import json
 import logging
 import sys
+import urllib.parse
 
 import requests
+
+import config
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
@@ -95,6 +111,11 @@ logger = logging.getLogger(__name__)
 
 SEARCH_URL = "https://www.depop.com/search/"
 REQUEST_TIMEOUT_SECONDS = 15
+# Bright Data Web Unlocker API endpoint (used instead of a direct request
+# when config.SCRAPER_API_KEY is set). Web Unlocker does its own internal
+# retries against the target site, so this timeout is generous.
+BRIGHTDATA_REQUEST_URL = "https://api.brightdata.com/request"
+SCRAPER_TIMEOUT_SECONDS = 60
 # Best-effort "most recent first" sort value (see module docstring gotchas).
 SORT_VALUE = "newest"
 # Plain, honest desktop-browser headers. No anti-bot spoofing.
@@ -149,8 +170,21 @@ def fetch_listings(query: str) -> list[dict]:
 
 
 def _fetch_search_html(query: str) -> str | None:
-    """GET the Depop search results page. Returns the HTML body, or None on
-    a transient network error / non-recoverable HTTP status (logged)."""
+    """Fetch the Depop search results page HTML.
+
+    Routes through Bright Data Web Unlocker when config.SCRAPER_API_KEY is
+    set (see module docstring); otherwise GETs depop.com directly. Returns
+    the HTML body, or None on a transient network error / non-recoverable
+    HTTP status (logged)."""
+    if config.SCRAPER_API_KEY:
+        return _fetch_search_html_via_brightdata(query)
+    return _fetch_search_html_direct(query)
+
+
+def _fetch_search_html_direct(query: str) -> str | None:
+    """GET the Depop search results page directly. Returns the HTML body,
+    or None on a transient network error / non-recoverable HTTP status
+    (logged)."""
     params = {"q": query, "sort": SORT_VALUE}
     try:
         response = requests.get(
@@ -181,6 +215,42 @@ def _fetch_search_html(query: str) -> str | None:
         return None
 
     return response.text
+
+
+def _fetch_search_html_via_brightdata(query: str) -> str | None:
+    """Fetch the Depop search results page through Bright Data's Web
+    Unlocker API. Returns the HTML body, or None on a transient network
+    error / non-recoverable HTTP status (logged). Raises ValueError on a
+    401/403 from api.brightdata.com -- that's a bad token or zone, a config
+    error we should crash loudly on rather than silently return no
+    listings forever."""
+    target_url = f"{SEARCH_URL}?" + urllib.parse.urlencode({"q": query, "sort": SORT_VALUE})
+    try:
+        response = requests.post(
+            BRIGHTDATA_REQUEST_URL,
+            json={"zone": config.SCRAPER_ZONE, "url": target_url, "format": "raw"},
+            headers={"Authorization": f"Bearer {config.SCRAPER_API_KEY}"},
+            timeout=SCRAPER_TIMEOUT_SECONDS,
+        )
+    except requests.RequestException as exc:
+        logger.warning("Bright Data Web Unlocker request failed (network error): %s", exc)
+        return None
+
+    if response.status_code == 200:
+        return response.text
+
+    if response.status_code in (401, 403):
+        raise ValueError(
+            f"Bright Data Web Unlocker returned HTTP {response.status_code} -- "
+            "likely a bad SCRAPER_API_KEY or SCRAPER_ZONE. This is a config "
+            "error, not a transient one."
+        )
+
+    logger.warning(
+        "Bright Data Web Unlocker returned unexpected HTTP %d. Returning no listings.",
+        response.status_code,
+    )
+    return None
 
 
 def _extract_product_objects(html: str) -> list[dict]:
@@ -336,8 +406,6 @@ def main() -> None:
     # Windows landmine: listing titles/descriptions can contain emoji, which
     # crash bare stdout prints on the default Windows console codepage.
     sys.stdout.reconfigure(encoding="utf-8")
-
-    import config
 
     listings = fetch_listings(config.SEARCH_QUERY)
     print(f"Query: {config.SEARCH_QUERY!r}")
