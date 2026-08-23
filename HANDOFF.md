@@ -1,4 +1,4 @@
-# HANDOFF.md — Session Handoff (updated 2026-08-23 ~20:15 UTC, supersedes all 2026-08-19 and earlier versions)
+# HANDOFF.md — Session Handoff (updated 2026-08-23 ~21:35 UTC, supersedes all 2026-08-19 and earlier versions)
 
 > For a fresh Claude session with no memory of prior conversations: read
 > this file first, then the repo CLAUDE.md for hard constraints (no
@@ -83,9 +83,11 @@ green.
    never expire) BEFORE trial credits run out (~700-750 left as of
    ~21:00 UTC ≈ ~12h of cron). When they run out, runs go red on search
    failures until the top-up — annoying but loud, not silent.
-2. Watch a few cron firings (`gh run list`), then this repo is in
-   steady state. (Local task disable + .env key restore: DONE this
-   session.)
+2. Nothing else. Scheduled (not just dispatched) cron firings are
+   CONFIRMED green on the new transport: 20:13 and 20:41 UTC runs,
+   normal GitHub drift. Local task disable + .env key restore: DONE.
+   The pinger is fully cloud-hosted; the owner's laptop can sleep or
+   shut down with zero effect.
 
 ## Settled questions (do not re-litigate)
 
