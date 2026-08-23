@@ -1,4 +1,44 @@
-# HANDOFF.md — Session Handoff (updated 2026-08-19 ~16:55 UTC, supersedes all 2026-08-17 and earlier versions)
+# HANDOFF.md — Session Handoff (updated 2026-08-23, supersedes all 2026-08-19 and earlier versions)
+
+**2026-08-23 criteria revision:** expert now wants SIZE 0 ONLY.
+`TARGET_SIZES` in config.py is `["0", "XXS", "US 0"]` (size 2 / XS / US 2
+removed; XXS kept as the letter form of 0). CRITERIA.md Q7 records the
+revision. Fixture tests updated (no fixture listing passes the real
+config anymore — verified deliberate); suite is now 60 tests, all green.
+
+**2026-08-23 BLOCKER — Bright Data is DEAD for this project.** Verified
+live: their Web Unlocker refuses depop.com with `policy_20050` ("target
+site requires special permission", returned as x-brd-* headers on an
+HTTP 200 with an empty body — the client now raises a clear ValueError
+on that pattern instead of a misleading schema error; new transport
+test, suite now 61 green). Depop is on Bright Data's compliance list
+requiring account KYC, and their KYC accepts only registered businesses
+with corporate email — a personal Gmail account cannot pass. Also
+corrected: their "free tier" was 5,000 one-time trial credits, not
+recurring monthly (the 08-19 claim was wrong).
+
+**Decision pending owner sign-off: switch to ScrapeBadger's dedicated
+Depop API** (scrapebadger.com/depop-scraper). Verified 2026-08-23 from
+their site: `GET /v1/depop/search` (10 credits/request) with filters
+(query, sizes, price_max, conditions, sort=newest, market=us), plus
+`GET /v1/depop/products/{slug}` (10 credits) for full description +
+condition. PAYG $0.15/1k credits, $10 minimum top-up, credits never
+expire, 1,000 free trial credits (100 searches) with no card. At the
+`*/10` cron: ~44,600 credits ≈ $6.70/month, inside the owner's approved
+$10/month budget. Design note: search cards DON'T include description/
+condition/country, so the plan is two-step — search for candidates,
+then detail-fetch only NEW unseen listings for text-exclusion and
+condition filtering (rare, ~pennies/month extra). This changes
+depop_client.py's parsing (JSON, no more RSC scraping via that path)
+and needs new fixtures from a real trial-key response.
+
+Owner's Bright Data key exists in .env + repo secret `SCRAPER_API_KEY`
+but is useless for depop; clean up during the swap. If the owner
+deposited money at Bright Data, they should request a refund (their
+compliance policy blocks the only target we have).
+
+Everything below is otherwise unchanged from 2026-08-19 except where
+marked corrected; Bright Data references in it are now historical.
 
 > For a fresh Claude session with no memory of prior conversations: read
 > this file first, then the repo CLAUDE.md for hard constraints (no
@@ -12,10 +52,11 @@
 **Hosting is moving BACK to GitHub Actions cron, blocked on one owner
 step: the Bright Data API token.** Code is done, tested (59/59 unit
 tests), committed, and pushed. `depop_client.py` now fetches through
-Bright Data's Web Unlocker API when `SCRAPER_API_KEY` is set (free tier:
-5,000 req/month, 1 credit per successful request, verified 2026-08-19),
-falling back to direct fetch when unset. Cron is `*/10` (4,464 runs max
-in a 31-day month, under the 5,000 cap). The workflow FAILS LOUDLY (red)
+Bright Data's Web Unlocker API when `SCRAPER_API_KEY` is set (billing
+CORRECTED 2026-08-23: pay-as-you-go $1.50/1k successful requests after
+5,000 one-time trial credits — see the correction block above), falling
+back to direct fetch when unset. Cron is `*/10` (4,464 runs max in a
+31-day month, ~$6.70/month after trial credits). The workflow FAILS LOUDLY (red)
 until the `SCRAPER_API_KEY` repo secret exists — deliberate, to avoid
 the green-but-blind failure mode. Expect red scheduled runs until the
 owner completes the setup steps below.
@@ -95,11 +136,14 @@ is the remaining milestone.
   2026-08-19; requirement was FREE). Local Task Scheduler is out: laptop
   sleep + residential 403s made it unreliable (numbers above). A paid
   always-on VPS was offered and declined.
-- Scraper API = Bright Data Web Unlocker, chosen on price (recurring
-  free 5K req/month). ScrapeBadger/Apify comparisons are settled (see
-  Just completed) — don't re-shop unless Bright Data's free tier changes.
-- Cron = `*/10`, sized to the 5,000/month cap. Don't tighten it without
-  re-doing that arithmetic.
+- Scraper API: Bright Data is OUT (compliance-blocks depop.com, KYC is
+  business-only — verified live 2026-08-23, see blocker block above).
+  ScrapeBadger is the chosen replacement pending owner sign-up; the
+  $30-50 monthly minimums at ScraperAPI/ScrapingBee/ZenRows/ScrapFly
+  stay out of budget, so don't re-shop those.
+- Cron = `*/10`, ~$6.70/month at ScrapeBadger's 10 credits/search and
+  $0.15/1k credits, under the owner's $10/month budget. Don't tighten
+  it without re-doing that arithmetic.
 - Direct-fetch path stays in `depop_client.py` as the no-key fallback
   (residential IPs only). Everything from the 08-17 handoff about the
   RSC parsing, condition enums, size handling, and criteria stands.
@@ -119,7 +163,7 @@ is the remaining milestone.
 | `setup_task.ps1` | local Task Scheduler registration — stopgap only, disable after Actions verified |
 | `data\logs\tracker.log` | local runs' log (gitignored); Actions runs log to the Actions console |
 | `CRITERIA.md` | expert's answers — the spec behind config.py |
-| `tests/` | 59 tests (`test_client_transport.py`, `test_notifier_history.py` new) |
+| `tests/` | 60 tests (`test_client_transport.py`, `test_notifier_history.py` new) |
 
 ## Operational landmines
 
@@ -139,9 +183,12 @@ is the remaining milestone.
 5. Reconfigure stdout to UTF-8 in any new CLI entry point (emoji in
    listing text crashes bare prints on Windows).
 6. Never set ANTHROPIC_API_KEY in this repo's automations (Max-plan rule).
-7. Bright Data free tier hard-stops at 5,000 credits/month (resets on
-   the 1st, no rollover, no surprise bills). If runs start failing near
-   month-end, that's the likely cause — check usage in their dashboard.
+7. Bright Data billing is pay-as-you-go ($1.50/1k successful requests)
+   after the one-time 5,000 trial credits — there is NO recurring free
+   tier. Budget cap is $10/month (owner, 2026-08-23); set a zone spend
+   limit in their dashboard if offered. Expected volume ≈6 requests/hour,
+   ~4,400-4,500/month — usage far above that means double-firing
+   (local stopgap task + Actions both running with keys).
 8. Notification size shown verbatim, never UK-stripped (UK 8 = US 4).
 9. Bare "4"/"6" are NOT excluded terms (collide with size mentions);
    only inch-marked forms. Don't "fix" it.
@@ -154,6 +201,6 @@ git pull; Get-Content alerts_history.jsonl -Tail 5
 .venv\Scripts\python.exe -m unittest discover tests
 ```
 Healthy ≈ recent workflow runs green with "N listings returned" (N > 0)
-in their logs, state commits landing on main, 59 tests OK. Until the
+in their logs, state commits landing on main, 60 tests OK. Until the
 owner adds the SCRAPER_API_KEY secret: runs red with the guard message
 is the expected state.

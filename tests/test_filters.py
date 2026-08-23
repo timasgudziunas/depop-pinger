@@ -87,11 +87,11 @@ class TestMatchesCriteria(unittest.TestCase):
     def test_defaults_to_config_when_not_passed(self):
         # No kwargs passed -> falls back to the real config.py criteria.
         # Build a listing that satisfies all of them.
-        listing = make_listing(size="2", price=20.0)
+        listing = make_listing(size="0", price=20.0)
         self.assertTrue(matches_criteria(listing))
 
         # Flip one field (price over config.MAX_PRICE) and it should fail.
-        over_priced = make_listing(size="2", price=26.0)
+        over_priced = make_listing(size="0", price=26.0)
         self.assertFalse(matches_criteria(over_priced))
 
 

@@ -54,7 +54,10 @@ you give me, the fewer good listings we miss.
 7. Exact sizes to target. Depop listings for these show plain numbers
    like "2", "4", "6". List every acceptable size, e.g. "4 and 6".
 
-   Answer: "0" . "2" extra small, extra extra small
+   Answer: "0" only. (Revised 2026-08-23 per the expert: size 2 removed,
+   ping on size 0 only. Original 2026-08-17 answer also included "2",
+   extra small, extra extra small. The letter form XXS still counts as
+   size 0.)
 
 8. If a listing does not state a size anywhere, should it still ping
    (you would check the photos yourself) or should it be skipped?

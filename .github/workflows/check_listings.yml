@@ -1,15 +1,22 @@
 name: Check Depop listings
 
-# HOSTING MOVED BACK to GitHub Actions 2026-08-19: the fetch layer now goes
-# through Bright Data Web Unlocker (depop_client.py), so GitHub's datacenter
-# IPs never touch depop.com directly anymore -- the 2026-08-17 Cloudflare
-# 403 blocks that forced the move to local Task Scheduler no longer apply.
-# Cron is */10 (6 runs/hour, 4,464/month at 744 hours in a 31-day month)
-# because Bright Data's Web Unlocker free tier is 5,000 requests/month --
-# this keeps a safety margin under that cap. GitHub cron is best-effort:
-# scheduled runs can fire late, especially at peak times. The state
-# commit-back step below also keeps this repo active, which prevents
-# GitHub's 60-day-inactivity auto-disable from ever triggering on this cron.
+# HOSTING MOVED BACK to GitHub Actions 2026-08-19: the fetch layer goes
+# through a scraper API (depop_client.py) instead of hitting depop.com
+# directly, so GitHub's datacenter IPs never touch depop.com -- the
+# 2026-08-17 Cloudflare 403 blocks that forced the move to local Task
+# Scheduler no longer apply. As of 2026-08-23 that scraper API is
+# ScrapeBadger's dedicated Depop API (Bright Data Web Unlocker was
+# abandoned the same day -- it compliance-blocks depop.com outright, see
+# CLAUDE.md). Cron is */10 (6 runs/hour, 4,464 searches/31-day month at 744
+# hours). Each run does one search call (10 credits) plus up to
+# config.MAX_DETAIL_FETCHES_PER_RUN detail calls (10 credits each) --
+# counting only the guaranteed search calls: 4,464 * 10 credits = 44,640
+# credits/month at $0.15/1,000 credits = ~$6.70/month, inside the owner's
+# $10/month budget (detail calls add to this but are bounded and typically
+# far fewer than the cap in practice). GitHub cron is best-effort: scheduled
+# runs can fire late, especially at peak times. The state commit-back step
+# below also keeps this repo active, which prevents GitHub's
+# 60-day-inactivity auto-disable from ever triggering on this cron.
 
 on:
   schedule:
@@ -48,7 +55,7 @@ jobs:
           SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
         run: |
           if [ -z "$SCRAPER_API_KEY" ]; then
-            echo "::error::SCRAPER_API_KEY secret is not set. Add the Bright Data API token as a repo secret -- without it this run cannot fetch listings from a datacenter IP."
+            echo "::error::SCRAPER_API_KEY secret is not set. Add the ScrapeBadger API key as a repo secret -- without it this run cannot fetch listings from a datacenter IP."
             exit 1
           fi
 
@@ -56,7 +63,6 @@ jobs:
         env:
           NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
           SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
-          BRIGHTDATA_ZONE: ${{ vars.BRIGHTDATA_ZONE || 'web_unlocker1' }}
         run: python tracker.py
 
       - name: Commit state back

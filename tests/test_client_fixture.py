@@ -44,21 +44,22 @@ class TestFixtureAgainstRealConfig(unittest.TestCase):
         objects = _load_fixture_objects()
         cls.listings = [_normalize_product(obj) for obj in objects]
 
-    def test_some_listings_pass_and_some_fail(self):
-        results = [matches_criteria(listing) for listing in self.listings]
-        passing = [l for l, r in zip(self.listings, results) if r]
-        failing = [l for l, r in zip(self.listings, results) if not r]
+    def test_no_fixture_listing_passes_real_config(self):
+        # Empirically verified 2026-08-23, after the size-0-only revision
+        # (CRITERIA.md Q7): NO fixture listing passes the full real config.
+        # The two that passed under the 2026-08-17 criteria (865279394 and
+        # 859710333) are both size 2, and the fixture's only size-0 listing
+        # (863434415) fails on excluded terms ("high rise").
+        passing = [l for l in self.listings if matches_criteria(l)]
+        self.assertEqual({l["id"] for l in passing}, set())
 
-        self.assertGreater(len(passing), 0, "expected at least one fixture listing to pass")
-        self.assertGreater(len(failing), 0, "expected at least one fixture listing to fail")
-
-        # Empirically verified against tests/fixtures/search_response.json,
-        # 2026-08-17: exactly these two listings satisfy every criterion in
-        # config.py (keyword, exclusions, size in {0,2,XS,XXS,US 0,US 2},
-        # price <= 25.0, condition in {brand_new, used_like_new,
-        # used_excellent}, country in {US, CA}, not kids).
-        passing_ids = {l["id"] for l in passing}
-        self.assertEqual(passing_ids, {"865279394", "859710333"})
+    def test_former_passers_fail_on_size_alone(self):
+        # 865279394 and 859710333 satisfy every OTHER real-config criterion:
+        # widening only target_sizes back to include "2" makes exactly these
+        # two pass, proving the size filter is the sole reason they now fail.
+        widened = ["0", "2", "XS", "XXS", "US 0", "US 2"]
+        passing = [l for l in self.listings if matches_criteria(l, target_sizes=widened)]
+        self.assertEqual({l["id"] for l in passing}, {"865279394", "859710333"})
 
     def test_used_good_listing_fails(self):
         used_good = [l for l in self.listings if l.get("condition") == "used_good"]
@@ -67,10 +68,10 @@ class TestFixtureAgainstRealConfig(unittest.TestCase):
             self.assertFalse(matches_criteria(listing))
 
     def test_wrong_sizes_fail(self):
-        # Sizes 4, 6, and S exist in the fixture and are not in
-        # config.TARGET_SIZES, so listings with those sizes (and otherwise
-        # matching config criteria) must fail on size alone.
-        for size in ("4", "6", "S"):
+        # Sizes 2, 4, 6, and S exist in the fixture and are not in
+        # config.TARGET_SIZES (size 0 only as of 2026-08-23), so listings
+        # with those sizes must fail regardless of other criteria.
+        for size in ("2", "4", "6", "S"):
             matching_size = [l for l in self.listings if l.get("size") == size]
             self.assertGreater(len(matching_size), 0, f"fixture should contain a size {size} listing")
             for listing in matching_size:

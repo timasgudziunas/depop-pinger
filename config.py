@@ -9,7 +9,8 @@ without touching filters.py. Text matching (keywords, exclusions) is
 case-insensitive and normalizes hyphens to spaces first, so "speed-up" and
 "speed up" are treated the same.
 
-Real criteria filled in from CRITERIA.md, 2026-08-17.
+Real criteria filled in from CRITERIA.md, 2026-08-17; sizes revised to
+0-only per the expert, 2026-08-23.
 """
 
 import os
@@ -54,8 +55,9 @@ EXCLUDED_TERMS: list[str] = [
 ]
 
 # Exact size strings to alert on (case-insensitive equality against the
-# listing's size field). Speed Ups in 0 / 2 / XXS / XS.
-TARGET_SIZES: list[str] = ["0", "2", "XS", "XXS", "US 0", "US 2"]
+# listing's size field). Size 0 ONLY as of 2026-08-23 (expert revision in
+# CRITERIA.md Q7); XXS kept as the letter form of 0.
+TARGET_SIZES: list[str] = ["0", "XXS", "US 0"]
 
 # Hard price cap in the listing's currency (item price as Depop displays it,
 # excluding shipping). At-or-under pings, over stays silent.
@@ -79,13 +81,31 @@ SEEN_RETENTION_DAYS = 14
 # ntfy.sh topic — set via environment (GitHub Actions secret / local .env).
 NTFY_TOPIC = os.environ.get("NTFY_TOPIC", "")
 
-# Bright Data API token for the Web Unlocker scraper API (free tier: 5,000
-# requests/month). Empty = fetch depop.com directly (works on residential
+# ScrapeBadger API key (sb_live_... prefix) for their dedicated Depop API,
+# live as of 2026-08-23, replacing Bright Data Web Unlocker. Pay-as-you-go
+# $0.15 per 1,000 credits; both a search call and a detail call cost 10
+# credits each (failed requests are free). Free tier rate limit: 5
+# requests/minute. Empty = fetch depop.com directly (works on residential
 # IPs only; datacenter IPs are Cloudflare-blocked).
 SCRAPER_API_KEY = os.environ.get("SCRAPER_API_KEY", "")
 
-# Bright Data zone name of the Web Unlocker zone.
-SCRAPER_ZONE = os.environ.get("BRIGHTDATA_ZONE", "web_unlocker1")
+# Depop market/region to search via ScrapeBadger. Supported codes (per
+# ScrapeBadger): us, gb, au, ie, it, fr, de, es, nl, nz. Canada isn't a
+# selectable market -- CA-seller country filtering (config.ALLOWED_COUNTRIES
+# includes "CA") is effectively delegated to whatever CA listings surface
+# under the "us" market, since ScrapeBadger doesn't expose seller country at
+# all (see depop_client.py's ScrapeBadger normalization -- country is
+# always None).
+MARKET = "us"
+
+# Cost/rate-limit bound on ScrapeBadger detail lookups (10 credits each,
+# free tier 5 requests/minute) per tracker run. Cards are cheaply
+# prefiltered first (see depop_client.py), so this caps only the surviving,
+# plausibly-matching candidates -- if it binds, dropped cards are simply
+# reconsidered next run (they aren't marked seen without a detail fetch). A
+# full cap of 8 costs at most ~2 minutes of 429 backoff worst-case at 5
+# req/min.
+MAX_DETAIL_FETCHES_PER_RUN = 8
 
 # Where full alert content is appended (one JSON object per line) so past
 # pings can be reviewed later. Tracked in git; the Actions cron commits it

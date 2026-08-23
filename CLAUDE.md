@@ -41,14 +41,46 @@ anything new → persist state → repeat via GitHub Actions cron.
    Cloudflare-challenged under sustained polling. Used as the local fallback
    fetch path when `SCRAPER_API_KEY` is unset (works on residential IPs
    only).
-2. **Third-party scraper API — LIVE as of 2026-08-19.** `depop_client.py`
-   routes through Bright Data's Web Unlocker API when `SCRAPER_API_KEY` is
-   set: it handles Cloudflare on Depop's behalf and returns the same raw
-   page HTML a browser would get, so the existing RSC parsing is untouched.
-   Free tier: 5,000 requests/month, 1 credit per successful request, failed
-   requests not charged. This is what made GitHub Actions hosting viable
-   again (see Scheduling below) — GitHub's datacenter IPs are Cloudflare-
-   blocked hitting depop.com directly, but Bright Data's IPs aren't.
+2. **Third-party scraper API — LIVE as of 2026-08-23 (ScrapeBadger).**
+   `depop_client.py` routes through ScrapeBadger's dedicated Depop API
+   (`https://scrapebadger.com/v1/depop`) when `SCRAPER_API_KEY` is set.
+   This replaced Bright Data Web Unlocker the same day: Bright Data
+   compliance-blocks depop.com outright (returns HTTP 200 with an empty
+   body and an `x-brd-err-code: policy_20050` header — "target site
+   requires special permission"), and their KYC path to unblock it is
+   business-only, not available to a personal account. So this is a
+   different kind of transport, not just a different vendor of the same
+   thing: ScrapeBadger returns structured JSON (no page HTML to scrape),
+   via two calls per surviving candidate listing —
+     1. `GET /search` (10 credits) returns lightweight "cards": slug, size,
+        price, is_sold, image — no listing id, no title, no condition.
+     2. `GET /products/{slug}` (10 credits) returns the rest: title,
+        description, condition. No size field on detail — size only comes
+        from the search card.
+   Cards are prefiltered for free (sold / already-evaluated / wrong size /
+   over price) before spending a detail call, and detail calls are capped
+   per run at `config.MAX_DETAIL_FETCHES_PER_RUN` (8) since they're the
+   rate-limited, paid part (free tier: 5 requests/minute). `seen_listings.json`
+   now means "already evaluated" (detail fetched, whether or not it
+   matched), not just "already alerted" — see tracker.py's module
+   docstring — so a given listing only ever costs one detail call across
+   its lifetime.
+   Pricing: pay-as-you-go, $0.15 per 1,000 credits, failed requests free.
+   At the `*/10` cron (4,464 searches/31-day month) that's already
+   4,464 × 10 = 44,640 credits ≈ $6.70/month on search calls alone, inside
+   the owner's approved $10/month budget (detail calls add a bounded amount
+   on top). Two known API quirks worth flagging for whoever touches this
+   next: the docs claim the "newest" sort value is `newlyListed`, but that
+   returns HTTP 502 live — `newest` (or `newly_listed`) is what actually
+   works. And `condition` on the detail response is a schema.org-style
+   string (`UsedCondition`, `NewCondition`), not the docs' claimed
+   `"Used - excellent"` form, and it doesn't expose the finer used_* grades
+   Depop itself has — `UsedCondition` maps to unknown/passes rather than
+   guessing a grade, and the text dealbreakers + a human looking at photos
+   before buying are relied on to cover that gap.
+   This is what makes GitHub Actions hosting viable again (see Scheduling
+   below) — GitHub's datacenter IPs are Cloudflare-blocked hitting
+   depop.com directly, but ScrapeBadger's IPs aren't.
 
 `depop_client.py` remains the only file that needs to change if the
 transport is swapped again.
@@ -60,7 +92,7 @@ depop-pinger/
 ├── config.py              # search keywords, target sizes, price ceiling, poll interval
 ├── depop_client.py        # fetches current listings for the search criteria
 ├── filters.py             # matches listings against config criteria
-├── state.py                # tracks which listing IDs have already been alerted on
+├── state.py                # tracks which listing IDs have already been evaluated (seen_listings.json)
 ├── notifier.py             # sends ntfy.sh push notifications
 ├── tracker.py               # orchestrates: fetch -> filter -> dedupe -> notify -> save state
 ├── setup_task.ps1          # registers the local Task Scheduler task (deprecated, see Scheduling)
@@ -73,15 +105,19 @@ depop-pinger/
         └── check_listings.yml   # the real scheduler again — see Scheduling below
 ```
 
-## Scheduling (changed 2026-08-19)
+## Scheduling (changed 2026-08-19, scraper vendor changed again 2026-08-23)
 
 Hosting moved BACK to GitHub Actions cron (`.github/workflows/check_listings.yml`,
-every 10 minutes) as of 2026-08-19, now that `depop_client.py` fetches
-through Bright Data Web Unlocker instead of hitting depop.com directly —
-GitHub's datacenter IPs never touch depop.com anymore, so the 2026-08-17
-Cloudflare 403 blocks that forced the move to local hosting no longer
-apply. The workflow commits `seen_listings.json` and `alerts_history.jsonl`
-back to the repo after each run.
+every 10 minutes) as of 2026-08-19, once `depop_client.py` started fetching
+through a scraper API instead of hitting depop.com directly — GitHub's
+datacenter IPs never touch depop.com anymore, so the 2026-08-17 Cloudflare
+403 blocks that forced the move to local hosting no longer apply. That
+scraper API is ScrapeBadger as of 2026-08-23 (Bright Data Web Unlocker,
+used 2026-08-19 through 2026-08-23, was abandoned — see "Data source
+options" above); the hosting rationale is unchanged, only the vendor
+behind `SCRAPER_API_KEY` is different. The workflow commits
+`seen_listings.json` and `alerts_history.jsonl` back to the repo after each
+run.
 
 The local Windows Task Scheduler task (`\DepopPinger\Check Listings`,
 registered by `setup_task.ps1`) is deprecated and still exists only until
@@ -98,9 +134,11 @@ verified so the two runners don't double-alert.
 - `config.py` sizes and price ceiling should ship as clearly marked
   placeholders (e.g. `TARGET_SIZES = []  # TODO: fill in with Timas's gf`)
   until the real criteria are confirmed.
-- State (`seen_listings.json`) is the source of truth for "already alerted" —
-  never re-notify on a listing ID already present in it. Prune entries older
-  than ~14 days so the file doesn't grow unbounded.
+- State (`seen_listings.json`) is the source of truth for "already
+  evaluated" (changed 2026-08-23 with the ScrapeBadger swap — see
+  tracker.py's module docstring): never re-fetch detail for or re-notify on
+  a listing ID already present in it. Prune entries older than ~14 days so
+  the file doesn't grow unbounded.
 - Notifications should include: item title, price, size (if parseable),
   and a direct link to the listing.
 - Secrets (ntfy topic if private, any scraper API key) go in GitHub Actions

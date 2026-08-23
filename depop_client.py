@@ -27,18 +27,25 @@ alone can't safely extract nested JSON) rather than calling a separate API
 endpoint. This IS "mimicking the browser request" in spirit: it's the exact
 HTML response depop.com's own frontend consumes to hydrate the page.
 
-Fetch transport (CLAUDE.md "data source option 2", live as of 2026-08-19):
-when `config.SCRAPER_API_KEY` is set, the search page is fetched through
-Bright Data's Web Unlocker API (`https://api.brightdata.com/request`) — a
-commercial scraper API that handles Cloudflare on Depop's behalf and hands
-back the same raw page HTML a browser would get (free tier: 5,000
-requests/month, 1 credit per successful request, failed requests not
-charged, verified 2026-08-19). This is what makes GitHub Actions-hosted
-polling viable again: GitHub's datacenter IPs are Cloudflare-blocked when
-hitting depop.com directly. When `SCRAPER_API_KEY` is unset, the module
-falls back to the original direct `requests.get` against depop.com (works
-on residential IPs only). Either way, the RSC parsing below is unchanged —
-Web Unlocker returns the same page HTML depop.com serves directly.
+Fetch transport (CLAUDE.md "data source option 2", ScrapeBadger live as of
+2026-08-23, replacing Bright Data Web Unlocker which was abandoned the same
+day -- Bright Data compliance-blocks depop.com outright and their KYC path
+is business-only, see CLAUDE.md): when `config.SCRAPER_API_KEY` is set,
+listings are fetched via ScrapeBadger's dedicated Depop API
+(`https://scrapebadger.com/v1/depop`) instead of scraping a rendered page at
+all. This is a structurally different transport from the RSC-parsing path
+below -- ScrapeBadger returns clean JSON (a `/search` card list, then a
+`/products/{slug}` detail call per surviving candidate), not page HTML, so
+none of the RSC extraction functions in this module apply to it. See the
+`_fetch_listings_via_scrapebadger` docstring for the two-step design. When
+`SCRAPER_API_KEY` is unset, the module falls back to the original direct
+`requests.get` against depop.com and the RSC parsing below (works on
+residential IPs only, e.g. local runs) -- that fallback path, and everything
+below about the RSC payload shape, is otherwise unchanged.
+
+The rest of this section (through "Gotchas") documents the direct/RSC
+fallback path specifically -- ScrapeBadger's JSON shape is different and is
+documented instead as code comments near `_normalize_scrapebadger_product`.
 
 What the API exposes about SIZE (verified empirically): each product object
 has a `sizes` array, e.g. `[{"name": "4", "id": 6, "quantity": 1,
@@ -98,7 +105,7 @@ from __future__ import annotations
 import json
 import logging
 import sys
-import urllib.parse
+import time
 
 import requests
 
@@ -111,13 +118,26 @@ logger = logging.getLogger(__name__)
 
 SEARCH_URL = "https://www.depop.com/search/"
 REQUEST_TIMEOUT_SECONDS = 15
-# Bright Data Web Unlocker API endpoint (used instead of a direct request
-# when config.SCRAPER_API_KEY is set). Web Unlocker does its own internal
-# retries against the target site, so this timeout is generous.
-BRIGHTDATA_REQUEST_URL = "https://api.brightdata.com/request"
-SCRAPER_TIMEOUT_SECONDS = 60
-# Best-effort "most recent first" sort value (see module docstring gotchas).
+# Best-effort "most recent first" sort value for the direct/RSC fallback
+# path (see module docstring gotchas). Unrelated to SCRAPEBADGER_SORT_VALUE
+# below -- same string value, different API.
 SORT_VALUE = "newest"
+
+# ScrapeBadger's dedicated Depop API (used instead of the direct/RSC path
+# when config.SCRAPER_API_KEY is set). Live as of 2026-08-23, replacing
+# Bright Data Web Unlocker (see CLAUDE.md and module docstring).
+SCRAPEBADGER_BASE_URL = "https://scrapebadger.com/v1/depop"
+SCRAPER_TIMEOUT_SECONDS = 20
+# ScrapeBadger's docs claim the "newest first" sort value is "newlyListed",
+# but that returns HTTP 502 (verified live 2026-08-23). "newest" is the
+# value that actually works ("newly_listed" also works; "newest" is used
+# here for readability). Flagging the docs/reality mismatch for whoever
+# hits this next.
+SCRAPEBADGER_SORT_VALUE = "newest"
+# Free tier is 5 requests/minute. On 429, sleep until the response's
+# reset_at (capped) and retry, up to this many times, before giving up.
+MAX_429_RETRIES = 2
+MAX_429_SLEEP_SECONDS = 90
 # Plain, honest desktop-browser headers. No anti-bot spoofing.
 USER_AGENT = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -141,19 +161,33 @@ class DepopResponseSchemaError(Exception):
     swallowing it and silently alerting on nothing."""
 
 
-def fetch_listings(query: str) -> list[dict]:
+def fetch_listings(query: str, skip_ids: set[str] | None = None) -> list[dict]:
     """Fetch current live Depop listings matching `query`.
+
+    `skip_ids` is the set of listing ids (see tracker.py/state.py -- "already
+    evaluated", not just "already alerted") to not bother re-fetching detail
+    for -- callers should pass `set(state.load_seen())`.
 
     Returns a list of normalized dicts with keys: id (str), title (str),
     price (float), currency (str), size (str or None), url (str),
     image_url (str or None), country (str or None), condition (str or
-    None), is_kids (bool or None). Sorted best-effort newest-first (see
-    module docstring). Returns an empty list on transient network errors
-    (logged) or on a genuine zero-result search. Raises
-    DepopResponseSchemaError if Depop's response no longer matches the
-    expected shape.
+    None), is_kids (bool or None). Returns an empty list on transient
+    network errors (logged) or on a genuine zero-result search. Raises
+    DepopResponseSchemaError if the response no longer matches the expected
+    shape, or ValueError on a 401/403 (bad SCRAPER_API_KEY -- a config error,
+    crash loudly).
+
+    When config.SCRAPER_API_KEY is set, routes through ScrapeBadger's Depop
+    API (see `_fetch_listings_via_scrapebadger`). Otherwise falls back to
+    the direct/RSC path against depop.com (residential IPs only), best-
+    effort newest-first per the module docstring.
     """
-    html = _fetch_search_html(query)
+    if config.SCRAPER_API_KEY:
+        listings = _fetch_listings_via_scrapebadger(query, skip_ids or set())
+        logger.info("fetch_listings(%r) via ScrapeBadger: %d listings returned", query, len(listings))
+        return listings
+
+    html = _fetch_search_html_direct(query)
     if html is None:
         return []
 
@@ -164,21 +198,13 @@ def fetch_listings(query: str) -> list[dict]:
     unique_by_id: dict[str, dict] = {}
     for obj in product_objects:
         unique_by_id.setdefault(str(obj["id"]), obj)
-    listings = [_normalize_product(obj) for obj in unique_by_id.values()]
-    logger.info("fetch_listings(%r): %d listings returned", query, len(listings))
+    listings = [
+        _normalize_product(obj)
+        for obj in unique_by_id.values()
+        if str(obj["id"]) not in (skip_ids or set())
+    ]
+    logger.info("fetch_listings(%r) direct: %d listings returned", query, len(listings))
     return listings
-
-
-def _fetch_search_html(query: str) -> str | None:
-    """Fetch the Depop search results page HTML.
-
-    Routes through Bright Data Web Unlocker when config.SCRAPER_API_KEY is
-    set (see module docstring); otherwise GETs depop.com directly. Returns
-    the HTML body, or None on a transient network error / non-recoverable
-    HTTP status (logged)."""
-    if config.SCRAPER_API_KEY:
-        return _fetch_search_html_via_brightdata(query)
-    return _fetch_search_html_direct(query)
 
 
 def _fetch_search_html_direct(query: str) -> str | None:
@@ -217,40 +243,235 @@ def _fetch_search_html_direct(query: str) -> str | None:
     return response.text
 
 
-def _fetch_search_html_via_brightdata(query: str) -> str | None:
-    """Fetch the Depop search results page through Bright Data's Web
-    Unlocker API. Returns the HTML body, or None on a transient network
-    error / non-recoverable HTTP status (logged). Raises ValueError on a
-    401/403 from api.brightdata.com -- that's a bad token or zone, a config
-    error we should crash loudly on rather than silently return no
-    listings forever."""
-    target_url = f"{SEARCH_URL}?" + urllib.parse.urlencode({"q": query, "sort": SORT_VALUE})
-    try:
-        response = requests.post(
-            BRIGHTDATA_REQUEST_URL,
-            json={"zone": config.SCRAPER_ZONE, "url": target_url, "format": "raw"},
-            headers={"Authorization": f"Bearer {config.SCRAPER_API_KEY}"},
-            timeout=SCRAPER_TIMEOUT_SECONDS,
+def _fetch_listings_via_scrapebadger(query: str, skip_ids: set[str]) -> list[dict]:
+    """Two-step ScrapeBadger fetch: a cheap search call returns lightweight
+    "cards" (no id, no title/condition), then a per-listing detail call
+    (same cost as search, 10 credits) fills in what's missing. Detail calls
+    are the expensive/rate-limited part, so cards are prefiltered first
+    (zero extra cost) on everything decidable from the card alone: sold,
+    already-evaluated (skip_ids), wrong size, over price. Only surviving
+    cards get a detail call, capped at config.MAX_DETAIL_FETCHES_PER_RUN.
+
+    Returns [] on a search failure (logged). A listing whose detail fetch
+    fails after retries is skipped (logged) and NOT returned, so it isn't
+    marked seen by the caller and gets retried next run."""
+    products = _scrapebadger_search(query)
+    if products is None:
+        return []
+
+    survivors = [card for card in products if _card_survives_prefilter(card, skip_ids)]
+    # Health signal: with prefiltering, 0 listings returned is the NORMAL
+    # healthy outcome most runs -- the card count is what proves the search
+    # actually fetched. This query never genuinely returns 0 cards (23-24
+    # typical), so 0 cards on a 200 means something upstream broke silently.
+    log = logger.warning if not products else logger.info
+    log(
+        "ScrapeBadger search for %r: %d cards returned, %d survived prefilter",
+        query, len(products), len(survivors),
+    )
+
+    if len(survivors) > config.MAX_DETAIL_FETCHES_PER_RUN:
+        dropped = len(survivors) - config.MAX_DETAIL_FETCHES_PER_RUN
+        logger.warning(
+            "%d cards survived prefiltering for %r but config.MAX_DETAIL_FETCHES_PER_RUN "
+            "is %d -- dropping %d this run (they'll be reconsidered next run since "
+            "they aren't marked seen without a detail fetch).",
+            len(survivors), query, config.MAX_DETAIL_FETCHES_PER_RUN, dropped,
         )
-    except requests.RequestException as exc:
-        logger.warning("Bright Data Web Unlocker request failed (network error): %s", exc)
+        survivors = survivors[: config.MAX_DETAIL_FETCHES_PER_RUN]
+
+    listings = []
+    for card in survivors:
+        detail = _scrapebadger_detail(card["slug"])
+        if detail is None:
+            logger.warning(
+                "Detail fetch failed for slug=%s after retries; skipping this run "
+                "(will retry next run).", card["slug"],
+            )
+            continue
+        listings.append(_normalize_scrapebadger_product(card, detail))
+    return listings
+
+
+def _card_survives_prefilter(card: dict, skip_ids: set[str]) -> bool:
+    """Zero-credit prefilter on a ScrapeBadger search card, before spending a
+    detail call on it. Skip when: sold, already evaluated (skip_ids), wrong
+    size (target_sizes set and no case-insensitive match -- a card with no
+    size is skipped too, mirroring filters._matches_size's "no size = no
+    match once sizes are configured" semantics), or over the price ceiling.
+    """
+    if card.get("is_sold"):
+        return False
+    if card.get("slug") in skip_ids:
+        return False
+    if config.TARGET_SIZES and not _card_size_matches(card.get("size"), config.TARGET_SIZES):
+        return False
+    if config.MAX_PRICE is not None and float(card["price"]) > config.MAX_PRICE:
+        return False
+    return True
+
+
+def _card_size_matches(size: str | None, target_sizes: list[str]) -> bool:
+    """Case-insensitive size match, mirroring filters._matches_size (kept as
+    a separate copy here rather than importing that private helper, so the
+    prefilter doesn't depend on filters.py's internals)."""
+    if size is None:
+        return False
+    size_normalized = size.strip().casefold()
+    return any(size_normalized == target.strip().casefold() for target in target_sizes)
+
+
+def _scrapebadger_search(query: str) -> list[dict] | None:
+    """GET {SCRAPEBADGER_BASE_URL}/search. Returns the "products" card list,
+    or None on a transient failure (logged; caller returns no listings for
+    this run). Raises DepopResponseSchemaError if a 200 response is missing
+    the "products" key."""
+    response = _scrapebadger_get(
+        "/search", {"query": query, "market": config.MARKET, "sort": SCRAPEBADGER_SORT_VALUE}
+    )
+    if response is None:
         return None
-
-    if response.status_code == 200:
-        return response.text
-
-    if response.status_code in (401, 403):
-        raise ValueError(
-            f"Bright Data Web Unlocker returned HTTP {response.status_code} -- "
-            "likely a bad SCRAPER_API_KEY or SCRAPER_ZONE. This is a config "
-            "error, not a transient one."
+    if response.status_code != 200:
+        logger.warning(
+            "ScrapeBadger search returned unexpected HTTP %d. Returning no listings.",
+            response.status_code,
         )
+        return None
+    data = response.json()
+    if "products" not in data:
+        raise DepopResponseSchemaError(
+            'ScrapeBadger search response is missing the "products" key -- '
+            "the API's response shape may have changed."
+        )
+    return data["products"]
 
+
+def _scrapebadger_detail(slug: str) -> dict | None:
+    """GET {SCRAPEBADGER_BASE_URL}/products/{slug}. Returns the parsed detail
+    dict, or None on a transient failure (logged; caller skips this
+    listing)."""
+    response = _scrapebadger_get(f"/products/{slug}", {"market": config.MARKET})
+    if response is None:
+        return None
+    if response.status_code != 200:
+        logger.warning(
+            "ScrapeBadger detail fetch for slug=%s returned unexpected HTTP %d.",
+            slug, response.status_code,
+        )
+        return None
+    return response.json()
+
+
+def _scrapebadger_get(path: str, params: dict) -> "requests.Response | None":
+    """GET {SCRAPEBADGER_BASE_URL}{path} with X-API-Key auth. Handles 429
+    (free tier: 5 req/min) by sleeping until the response's `reset_at`
+    (capped at MAX_429_SLEEP_SECONDS) and retrying, up to MAX_429_RETRIES
+    times -- after that, the last response (still a 429) is returned as-is
+    for the caller's normal non-200 handling. Raises ValueError on 401/403
+    (bad SCRAPER_API_KEY -- a config error, crash loudly rather than
+    silently return no listings forever). Returns None on
+    requests.RequestException (network error, logged)."""
+    url = f"{SCRAPEBADGER_BASE_URL}{path}"
+    headers = {"X-API-Key": config.SCRAPER_API_KEY}
+    attempt = 0
+    while True:
+        try:
+            response = requests.get(url, params=params, headers=headers, timeout=SCRAPER_TIMEOUT_SECONDS)
+        except requests.RequestException as exc:
+            logger.warning("ScrapeBadger request to %s failed (network error): %s", path, exc)
+            return None
+
+        if response.status_code in (401, 403):
+            raise ValueError(
+                f"ScrapeBadger returned HTTP {response.status_code} on {path} -- "
+                "likely a bad SCRAPER_API_KEY. This is a config error, not a "
+                "transient one."
+            )
+
+        if response.status_code == 429 and attempt < MAX_429_RETRIES:
+            attempt += 1
+            try:
+                reset_at = response.json().get("reset_at")
+            except ValueError:
+                reset_at = None
+            sleep_seconds = MAX_429_SLEEP_SECONDS
+            if reset_at is not None:
+                sleep_seconds = min(max(reset_at - time.time(), 0), MAX_429_SLEEP_SECONDS)
+            logger.warning(
+                "ScrapeBadger rate limited (429) on %s, sleeping %.0fs then retrying "
+                "(attempt %d/%d).", path, sleep_seconds, attempt, MAX_429_RETRIES,
+            )
+            time.sleep(sleep_seconds)
+            continue
+
+        return response
+
+
+# ScrapeBadger condition values seen live, mapped to this module's existing
+# condition vocabulary (config.ALLOWED_CONDITIONS / filters.py). Schema.org-
+# style strings ("UsedCondition"), not the docs' claimed "Used - excellent"
+# form. "UsedCondition" maps to None (passes the filter on the existing
+# only-positive-evidence principle -- filters._matches_condition treats a
+# missing condition as a pass) rather than to any of the used_* granularity
+# levels, because ScrapeBadger doesn't expose anything finer than new/used.
+# That granularity loss is accepted: the text dealbreakers (stains, pilling,
+# etc. in config.EXCLUDED_TERMS) plus a human looking at photos before
+# buying cover the gap.
+_CONDITION_MAP = {
+    "NewCondition": "brand_new",
+    "UsedCondition": None,
+}
+
+
+def _map_condition(raw_condition: str | None) -> str | None:
+    """Map a raw ScrapeBadger condition string to this module's normalized
+    condition vocabulary. Unknown non-null values pass the filter (None) but
+    are logged so the real enum can be learned over time."""
+    if raw_condition is None:
+        return None
+    if raw_condition in _CONDITION_MAP:
+        return _CONDITION_MAP[raw_condition]
     logger.warning(
-        "Bright Data Web Unlocker returned unexpected HTTP %d. Returning no listings.",
-        response.status_code,
+        "Unrecognized ScrapeBadger condition value %r -- treating as unknown "
+        "(passes the condition filter). Add it to _CONDITION_MAP once seen "
+        "enough to know what it means.", raw_condition,
     )
     return None
+
+
+def _normalize_scrapebadger_product(card: dict, detail: dict) -> dict:
+    """Merge a ScrapeBadger search card and its detail response into this
+    module's normalized listing shape (same keys _normalize_product
+    produces, so filters.py needs no changes). `id` is the slug (a string)
+    -- ScrapeBadger's search cards carry no numeric id at all, only detail
+    does, so keying on slug avoids a second lookup just to get an id state
+    can track. `size` and `image` only exist on the card; `title`/
+    `description`/`condition` only exist on detail; `country`/`is_kids`
+    aren't exposed by ScrapeBadger at all and are always None (None passes
+    both filters by design -- only-positive-evidence)."""
+    title = (detail.get("title") or "").strip()
+    description = (detail.get("description") or "").strip()
+    # Observed live: description's first line duplicates the title
+    # ("-size 6 black lululemon speedup shorts low rise + ..."), so
+    # concatenating both would double up the same text. Only prepend title
+    # when description doesn't already start with it.
+    if title and description.casefold().startswith(title.casefold()):
+        combined_title = description
+    else:
+        combined_title = f"{title} {description}".strip()
+
+    return {
+        "id": card["slug"],
+        "title": combined_title,
+        "price": float(card["price"]),
+        "currency": card["currency"],
+        "size": card.get("size"),
+        "url": card["url"],
+        "image_url": card.get("image"),
+        "country": None,
+        "condition": _map_condition(detail.get("condition")),
+        "is_kids": None,
+    }
 
 
 def _extract_product_objects(html: str) -> list[dict]:
