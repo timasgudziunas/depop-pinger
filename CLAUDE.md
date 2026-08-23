@@ -77,7 +77,12 @@ anything new → persist state → repeat via GitHub Actions cron.
    `"Used - excellent"` form, and it doesn't expose the finer used_* grades
    Depop itself has — `UsedCondition` maps to unknown/passes rather than
    guessing a grade, and the text dealbreakers + a human looking at photos
-   before buying are relied on to cover that gap.
+   before buying are relied on to cover that gap. `price_max` is applied
+   server-side on the search call (verified live 2026-08-23), so page 1 only
+   carries in-budget listings. The documented `sizes` filter param is
+   silently ignored (verified live the same day: `sizes=2` returned the
+   identical mixed-size result set as no filter), so size filtering stays
+   local-only.
    This is what makes GitHub Actions hosting viable again (see Scheduling
    below) — GitHub's datacenter IPs are Cloudflare-blocked hitting
    depop.com directly, but ScrapeBadger's IPs aren't.

@@ -75,6 +75,20 @@ ALLOWED_COUNTRIES: list[str] = ["US", "CA"]
 # 2026-08-19). Used only if tracker.py is ever run as a manual local loop.
 POLL_INTERVAL_SECONDS = 90
 
+# Informational only: drives the ping's condition note (see
+# filters.condition_note), never filters listings. First matching phrase
+# (case-insensitive, word-boundary, hyphen/curly-quote normalized -- same
+# machinery as EXCLUDED_TERMS) found in the listing text is quoted back in
+# the notification so the owner can triage from the push alone. Deliberately
+# excludes "good condition"/"vguc" -- below the expert's excellent minimum
+# (CRITERIA.md) -- so the note only vouches for wording that meets the bar.
+CONDITION_POSITIVE_PHRASES: list[str] = [
+    "excellent condition", "perfect condition", "great condition",
+    "mint condition", "like new", "brand new", "new with tags",
+    "new without tags", "nwt", "nwot", "euc", "never worn", "worn once",
+    "worn twice", "barely worn", "no flaws", "flawless",
+]
+
 # Days to keep listing IDs in seen_listings.json before pruning.
 SEEN_RETENTION_DAYS = 14
 

@@ -8,6 +8,7 @@ from datetime import datetime, timezone
 import requests
 
 import config
+import filters
 
 logger = logging.getLogger(__name__)
 
@@ -41,6 +42,9 @@ def send_alert(listing: dict) -> bool:
     ]
     if listing.get("size"):
         body_lines.append(f"Size: {listing['size']}")
+    # Informational only -- never affects whether this alert fires. See
+    # filters.condition_note.
+    body_lines.append(filters.condition_note(listing))
     body = "\n".join(body_lines)
 
     # ntfy headers must be latin-1 safe (listing titles may contain emoji), so
@@ -91,6 +95,7 @@ def _append_history(listing: dict) -> None:
         "size": listing.get("size"),
         "url": listing.get("url"),
         "image_url": listing.get("image_url"),
+        "condition_note": filters.condition_note(listing),
     }
     try:
         with open(config.ALERTS_HISTORY_PATH, "a", encoding="utf-8") as f:

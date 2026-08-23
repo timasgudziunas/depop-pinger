@@ -325,10 +325,25 @@ def _scrapebadger_search(query: str) -> list[dict] | None:
     """GET {SCRAPEBADGER_BASE_URL}/search. Returns the "products" card list,
     or None on a transient failure (logged; caller returns no listings for
     this run). Raises DepopResponseSchemaError if a 200 response is missing
-    the "products" key."""
-    response = _scrapebadger_get(
-        "/search", {"query": query, "market": config.MARKET, "sort": SCRAPEBADGER_SORT_VALUE}
-    )
+    the "products" key.
+
+    Deliberately does NOT send ScrapeBadger's documented `sizes` filter
+    param: verified live 2026-08-23 that `sizes=2` returned the identical
+    mixed-size result set as no filter at all (no error, just silently
+    ignored). Size narrowing therefore stays local-only, in
+    `_card_survives_prefilter` / filters._matches_size. Do not re-add a
+    `sizes` param here without re-verifying live first.
+
+    Does send `price_max` (when config.MAX_PRICE is set): verified live
+    2026-08-23 that with price_max=25 the API returned a full page of 24
+    cards ALL priced at or under $25.00, so page 1 stops wasting slots on
+    over-budget listings -- better coverage of relevant listings on a given
+    page, with no change to the "N cards returned" health signal.
+    """
+    params = {"query": query, "market": config.MARKET, "sort": SCRAPEBADGER_SORT_VALUE}
+    if config.MAX_PRICE is not None:
+        params["price_max"] = config.MAX_PRICE
+    response = _scrapebadger_get("/search", params)
     if response is None:
         return None
     if response.status_code != 200:

@@ -154,3 +154,30 @@ def _matches_country(listing: dict, allowed_countries: list[str]) -> bool:
 def _is_not_kids(listing: dict) -> bool:
     """Kids listings are never wanted, regardless of config -- no knob."""
     return listing.get("is_kids") is not True
+
+
+def condition_note(listing: dict) -> str:
+    """Informational-only condition annotation for a ping's body -- never
+    used for filtering (matches_criteria and everything it calls are
+    untouched by this function; it's a separate, purely additive read of
+    the same listing dict).
+
+    First match wins:
+      1. listing["condition"] == "brand_new" -> seller-marked new.
+      2. Else scan listing["title"] (the combined title+description text --
+         see depop_client._normalize_scrapebadger_product) for the first
+         config.CONDITION_POSITIVE_PHRASES entry, using the same
+         normalization/word-boundary matching as _has_no_excluded_term so
+         "like-new", "Like New", curly quotes etc. all hit.
+      3. Else the condition is unstated -- prompt a manual photo check.
+    """
+    if listing.get("condition") == "brand_new":
+        return "✓ Condition: new (seller-marked)"
+
+    title = _normalize_text(listing.get("title") or "")
+    for phrase in config.CONDITION_POSITIVE_PHRASES:
+        pattern = r"(?<!\w)" + re.escape(_normalize_text(phrase)) + r"(?!\w)"
+        if re.search(pattern, title):
+            return f'✓ Condition: says "{phrase}"'
+
+    return "⚠ Condition unstated. Check photos"

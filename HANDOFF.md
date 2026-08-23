@@ -15,8 +15,21 @@ API (two-step: search cards → prefilter → detail only for new
 candidates). First verified-green cloud run: workflow run 32662828606,
 2026-08-23 19:56 UTC, log shows "24 cards returned, 0 survived
 prefilter" — the healthy signature (see landmine 2). Local manual run
-identical. 71 unit tests green. Criteria: size 0 only (`TARGET_SIZES =
+identical. 80 unit tests green. Criteria: size 0 only (`TARGET_SIZES =
 ["0", "XXS", "US 0"]`), max $25, everything else per CRITERIA.md.
+
+**Late-session additions (~21:00 UTC), both verified live:** (1) search
+is server-narrowed with `price_max` = config.MAX_PRICE — page 1 now only
+carries in-budget listings (still a full 24 cards, so the heartbeat is
+unchanged). ScrapeBadger's documented `sizes` filter is SILENTLY IGNORED
+(verified: `sizes=2` returned the same mixed sizes) — size filtering
+stays local; don't re-add the param untested. (2) Every ping's body now
+ends with an informational condition note from `filters.condition_note`
+("✓ Condition: new" / '✓ Condition: says "like new"' / "⚠ Condition
+unstated. Check photos") driven by `config.CONDITION_POSITIVE_PHRASES`
+— informational ONLY, never filters (regression-tested), also recorded
+in alerts_history as `condition_note`. A real test ping with the note
+was delivered 2026-08-23 ~20:50 UTC.
 
 **Money state:** ScrapeBadger trial had 1,000 free credits; roughly 850
 remain (estimate — ~15 searches and 1 detail spent on probes, local
@@ -26,11 +39,11 @@ last ~14 more hours from the timestamp above. **The $10 minimum top-up
 buys ~66,000 credits ≈ 6+ weeks of runtime**; steady-state cost is
 ~$6.70/month, inside the owner's approved $10/month budget.
 
-**Local Task Scheduler task `\DepopPinger\Check Listings` (2-min) is
-still ENABLED but neutered:** its `SCRAPER_API_KEY` line in `.env` is
-commented out (2026-08-23) because at 2-min cadence it was burning ~300
-credits/hour. It currently falls back to free direct fetches. Disabling
-it needs an elevated shell; the attempt this session got UAC-declined.
+**Local Task Scheduler task `\DepopPinger\Check Listings` is DISABLED**
+(verified 2026-08-23 ~20:40 UTC via elevated shell). `.env` again holds
+the active `SCRAPER_API_KEY` for manual local runs (the temporary
+comment-out during the burn scare is over; the owner may have deleted
+the commented line while viewing the file — it was re-added fresh).
 
 ## Just completed (this session, 2026-08-23)
 
@@ -67,18 +80,12 @@ green.
 ## Next steps, in priority order
 
 1. **Owner: top up $10 at ScrapeBadger** (PAYG, card or crypto, credits
-   never expire) BEFORE trial credits run out (~14h from timestamp
-   above). When they run out, runs go red on search failures until the
-   top-up — annoying but loud, not silent.
-2. **Owner: disable the local task** from an elevated PowerShell:
-   `Disable-ScheduledTask -TaskPath '\DepopPinger\' -TaskName 'Check Listings'`
-   It's harmless but pointless while keyless (direct fetches mostly
-   403), and a residential-IP success could double-alert vs Actions.
-3. **After the task is disabled: uncomment `SCRAPER_API_KEY` in `.env`**
-   (the line carries a comment saying exactly this) so manual local runs
-   work again. Do NOT uncomment while the 2-min task is still enabled.
-4. Watch a few cron firings (`gh run list`), then this repo is in
-   steady state.
+   never expire) BEFORE trial credits run out (~700-750 left as of
+   ~21:00 UTC ≈ ~12h of cron). When they run out, runs go red on search
+   failures until the top-up — annoying but loud, not silent.
+2. Watch a few cron firings (`gh run list`), then this repo is in
+   steady state. (Local task disable + .env key restore: DONE this
+   session.)
 
 ## Settled questions (do not re-litigate)
 
@@ -128,9 +135,13 @@ green.
 3. Free-tier rate limit is 5 requests/minute; the client sleeps and
    retries on 429 (`reset_at`-aware). A run with many new size-0
    listings can legitimately take a few minutes.
-4. Do NOT uncomment `SCRAPER_API_KEY` in `.env` while the 2-min local
-   task is still enabled — it burns ~300 credits/hour (~$32/month pace).
-   Disable the task first (Next steps 2-3).
+4. Do NOT re-enable the local 2-min task while `.env` holds the live
+   `SCRAPER_API_KEY` — at that cadence it burns ~300 credits/hour
+   (~$32/month pace; this actually happened for ~40 minutes on
+   2026-08-23 before being caught). It is disabled; leave it disabled.
+   Related: ScrapeBadger's `sizes` search param is silently ignored
+   (verified 2026-08-23) — size filtering is local-only, don't re-add
+   the param without a live re-test.
 5. If the local task is ever recreated by hand it reverts to
    Interactive-only + battery-restricted — re-register via
    `setup_task.ps1` (elevated). (Moot once disabled.)
@@ -154,5 +165,6 @@ gh run view --log $(gh run list --workflow=check_listings.yml --limit 1 --json d
 .venv\Scripts\python.exe -m unittest discover tests
 ```
 Healthy ≈ recent runs green, latest log shows "24 cards returned, N
-survived prefilter" (0 survivors is normal), 71 tests OK. Red runs +
-"insufficient credits"-shaped errors = top up ScrapeBadger.
+survived prefilter" (0 survivors is normal; card prices all ≤ $25 now
+that price_max is server-side), 80 tests OK. Red runs + "insufficient
+credits"-shaped errors = top up ScrapeBadger.

@@ -91,10 +91,26 @@ class TestScrapeBadgerHappyPath(unittest.TestCase):
         self.assertEqual(search_call.kwargs["headers"]["X-API-Key"], "sb_live_test")
         self.assertEqual(search_call.kwargs["params"]["sort"], "newest")
         self.assertEqual(search_call.kwargs["params"]["query"], "lululemon speedup shorts")
+        self.assertEqual(search_call.kwargs["params"]["price_max"], 25.0)
+        self.assertNotIn("sizes", search_call.kwargs["params"])
 
         detail_url = detail_call.args[0]
         self.assertEqual(detail_url, "https://scrapebadger.com/v1/depop/products/a-slug")
         self.assertEqual(detail_call.kwargs["headers"]["X-API-Key"], "sb_live_test")
+
+
+class TestScrapeBadgerPriceMaxParam(unittest.TestCase):
+    def test_price_max_absent_when_max_price_none(self):
+        search_resp = _mock_response(200, {"products": [], "meta": {}, "market": "us", "query": "q"})
+
+        with mock.patch.object(config, "SCRAPER_API_KEY", "sb_live_test"), \
+                mock.patch.object(config, "MAX_PRICE", None), \
+                mock.patch("depop_client.requests.get", return_value=search_resp) as mock_get:
+            depop_client.fetch_listings("q")
+
+        search_call = mock_get.call_args_list[0]
+        self.assertNotIn("price_max", search_call.kwargs["params"])
+        self.assertNotIn("sizes", search_call.kwargs["params"])
 
 
 class TestScrapeBadgerPrefilter(unittest.TestCase):

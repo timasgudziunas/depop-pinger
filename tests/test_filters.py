@@ -8,7 +8,7 @@ import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from filters import matches_criteria
+from filters import condition_note, matches_criteria
 
 
 def make_listing(
@@ -401,6 +401,67 @@ class TestIsKids(unittest.TestCase):
                 allowed_countries=[],
             )
         )
+
+
+class TestConditionNote(unittest.TestCase):
+    def test_brand_new_condition_gives_new_note(self):
+        listing = make_listing(condition="brand_new", title="anything at all")
+        self.assertEqual(condition_note(listing), "✓ Condition: new (seller-marked)")
+
+    def test_like_new_text_gives_says_note(self):
+        listing = make_listing(condition="used_excellent", title="Lululemon speed up shorts, like new")
+        self.assertEqual(condition_note(listing), '✓ Condition: says "like new"')
+
+    def test_case_and_hyphen_variant_matches(self):
+        listing = make_listing(condition="used_excellent", title="Lululemon speed up shorts, Like-New")
+        self.assertEqual(condition_note(listing), '✓ Condition: says "like new"')
+
+    def test_adjacent_punctuation_still_matches_word_boundary(self):
+        listing = make_listing(condition="used_excellent", title="Lululemon speed up shorts LIKE NEW!!")
+        self.assertEqual(condition_note(listing), '✓ Condition: says "like new"')
+
+    def test_no_positive_phrase_gives_unstated_note(self):
+        listing = make_listing(condition="used_excellent", title="Lululemon speed up shorts, worn a few times")
+        self.assertEqual(condition_note(listing), "⚠ Condition unstated. Check photos")
+
+    def test_good_condition_only_is_deliberately_not_vouched(self):
+        # "good condition" / "vguc" are below the expert's excellent minimum
+        # and are intentionally excluded from CONDITION_POSITIVE_PHRASES.
+        listing = make_listing(condition="used_excellent", title="Lululemon speed up shorts, good condition")
+        self.assertEqual(condition_note(listing), "⚠ Condition unstated. Check photos")
+
+    def test_condition_note_never_changes_matches_criteria(self):
+        # Regression guard: condition_note is purely informational. A
+        # listing that passes matches_criteria must keep passing regardless
+        # of what condition phrases appear in its text, and one that fails
+        # must keep failing.
+        passing = make_listing(size="0", price=20.0, condition="used_excellent")
+        self.assertTrue(matches_criteria(passing))
+
+        for extra_text in (
+            "", " like new", " brand new nwt", " good condition only",
+            " no flaws flawless mint condition",
+        ):
+            with_note_text = make_listing(
+                size="0", price=20.0, condition="used_excellent",
+                title=passing["title"] + extra_text,
+            )
+            self.assertEqual(
+                matches_criteria(passing), matches_criteria(with_note_text),
+                f"adding {extra_text!r} changed matches_criteria's result",
+            )
+
+        failing = make_listing(size="10", price=20.0, condition="used_excellent")
+        self.assertFalse(matches_criteria(failing))
+        for extra_text in ("", " like new", " brand new nwt"):
+            with_note_text = make_listing(
+                size="10", price=20.0, condition="used_excellent",
+                title=failing["title"] + extra_text,
+            )
+            self.assertEqual(
+                matches_criteria(failing), matches_criteria(with_note_text),
+                f"adding {extra_text!r} changed matches_criteria's result",
+            )
 
 
 if __name__ == "__main__":
