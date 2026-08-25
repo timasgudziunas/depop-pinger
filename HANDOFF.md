@@ -1,172 +1,150 @@
-# HANDOFF.md — Session Handoff (updated 2026-08-23 ~21:35 UTC, supersedes all 2026-08-19 and earlier versions)
+# HANDOFF.md — Session Handoff (updated 2026-08-25 ~15:20 UTC, supersedes all 2026-08-23 and earlier versions)
 
 > For a fresh Claude session with no memory of prior conversations: read
 > this file first, then the repo CLAUDE.md for hard constraints (no
 > auto-buy, no Cloudflare evasion) and its "Data source options" section
-> (ScrapeBadger Depop API as of 2026-08-23), then `depop_client.py`'s
-> module docstring if touching the data source. `CRITERIA.md` holds the
-> expert's answers behind config.py (revised 2026-08-23: size 0 only).
+> (ScrapeBadger Depop API), then `depop_client.py`'s module docstring if
+> touching the data source. `CRITERIA.md` holds the expert's answers
+> behind config.py (size 0 only).
 
-## Current state (as of 2026-08-23 ~20:15 UTC)
+## Current state (as of 2026-08-25 ~15:15 UTC)
 
-**LIVE and verified end to end on ScrapeBadger.** GitHub Actions cron
-(`*/10`) runs `tracker.py`, which fetches through ScrapeBadger's Depop
-API (two-step: search cards → prefilter → detail only for new
-candidates). First verified-green cloud run: workflow run 32662828606,
-2026-08-23 19:56 UTC, log shows "24 cards returned, 0 survived
-prefilter" — the healthy signature (see landmine 2). Local manual run
-identical. 80 unit tests green. Criteria: size 0 only (`TARGET_SIZES =
-["0", "XXS", "US 0"]`), max $25, everything else per CRITERIA.md.
+**LIVE and healthy — but credits nearly exhausted (see Money state).**
+Every scheduled Actions run since the ScrapeBadger swap went live
+(2026-08-23 19:56 UTC) is green: 65/65 through 14:58 UTC today. All
+older red runs in the history are the pre-swap Bright Data era —
+expected, not a problem. GitHub cron drift is real: `*/10` actually
+fires ~every 30–50 min (~34 runs/day observed 08-24).
 
-**Late-session additions (~21:00 UTC), both verified live:** (1) search
-is server-narrowed with `price_max` = config.MAX_PRICE — page 1 now only
-carries in-budget listings (still a full 24 cards, so the heartbeat is
-unchanged). ScrapeBadger's documented `sizes` filter is SILENTLY IGNORED
-(verified: `sizes=2` returned the same mixed sizes) — size filtering
-stays local; don't re-add the param untested. (2) Every ping's body now
-ends with an informational condition note from `filters.condition_note`
-("✓ Condition: new" / '✓ Condition: says "like new"' / "⚠ Condition
-unstated. Check photos") driven by `config.CONDITION_POSITIVE_PHRASES`
-— informational ONLY, never filters (regression-tested), also recorded
-in alerts_history as `condition_note`. A real test ping with the note
-was delivered 2026-08-23 ~20:50 UTC.
+No alerts since the swap. Two size-0 candidates were detail-fetched and
+correctly rejected (both say "4 inch" — wrong inseam):
+`tiffers8c-...-4-inch-size-ed95` (08-25 04:02 UTC) and
+`annagran08-red-...-aea8` (08-25 10:03 UTC, description "4 inch inseam
+high wasted"). State commit-back is working (`update pinger state
+[auto]` commits on origin/main — always `git pull` before reading state
+files locally).
 
-**Money state:** ScrapeBadger trial had 1,000 free credits; roughly 850
-remain (estimate — ~15 searches and 1 detail spent on probes, local
-runs, and task firings; exact number on their dashboard). At 10
-credits/search and the `*/10` cron (~6 searches/hour), trial credits
-last ~14 more hours from the timestamp above. **The $10 minimum top-up
-buys ~66,000 credits ≈ 6+ weeks of runtime**; steady-state cost is
-~$6.70/month, inside the owner's approved $10/month budget.
+Test suite: 81 tests green (one added this session locking the
+$25.00-exact prefilter boundary).
 
-**Local Task Scheduler task `\DepopPinger\Check Listings` is DISABLED**
-(verified 2026-08-23 ~20:40 UTC via elevated shell). `.env` again holds
-the active `SCRAPER_API_KEY` for manual local runs (the temporary
-comment-out during the burn scare is over; the owner may have deleted
-the commented line while viewing the file — it was re-added fresh).
+## Money state — TOP-UP URGENT
 
-## Just completed (this session, 2026-08-23)
+Checked live 2026-08-25 15:05 UTC via `GET /v1/account/me` (free, no
+credits): **total_credits_balance = 100**, free tier, 5 req/min. ~30
+more were spent on this session's probes, so **~70 credits ≈ 7 API
+calls ≈ a few hours of cron remain**. The $10 top-up from the 08-23
+handoff never happened. Burn rate at observed cron drift: ~340
+credits/day. When credits hit 0, runs go red on search failures — loud,
+not silent, and no listings are watched until top-up. **Owner: top up
+$10 (~66,000 credits ≈ 6+ weeks) at the ScrapeBadger dashboard now.**
 
-- Criteria revised to size 0 only per the expert (CRITERIA.md Q7,
-  config.py, fixture tests restructured).
-- Bright Data purchased, tested live, and found DEAD for this project:
-  compliance-blocks depop.com (`policy_20050` via x-brd headers on an
-  empty HTTP 200), KYC unblock is business-only. Full writeup in
-  CLAUDE.md "Data source options". Client now raises clearly on that
-  header pattern. Owner should request a refund of any Bright Data
-  deposit.
-- Transport swapped to ScrapeBadger Depop API (search+detail two-step,
-  free-card prefilter, `MAX_DETAIL_FETCHES_PER_RUN` cap, 429 backoff via
-  `reset_at`). Live-probed quirks are commented in code: sort value is
-  `newest` (docs' `newlyListed` 502s); condition is schema.org-style
-  (`UsedCondition`/`NewCondition`) so used-grade granularity is lost —
-  generic used passes the condition gate, text dealbreakers + photos
-  cover it.
-- `seen_listings.json` semantics changed to "already EVALUATED" (not
-  just alerted) so each listing costs at most one detail call ever;
-  slugs are the new ids, old numeric ids age out via pruning.
-- Real API fixtures captured (`tests/fixtures/scrapebadger_*.json`);
-  suite 61 → 71 tests.
-- Committed and pushed (`3d3e594`), workflow dispatched, first green run
-  verified with state-commit-back machinery intact.
+## Just completed (this session, 2026-08-25)
+
+- Investigated the owner's report of a missed size-0 $25 ping from
+  08-24. **Verdict: the $25 cap is inclusive at every layer** — see
+  Settled questions. The listing was never evaluated (no seen entry, no
+  survivor in any run's log), so it was dropped before detail: most
+  likely sold within the 30–50 min gap between cron firings (`is_sold`
+  cards are prefiltered), or its card `size` wasn't exactly
+  "0"/"XXS"/"US 0", or it never reached page 1. If the owner still has
+  the listing URL, the exact cause can be pinned down.
+- Discovered ScrapeBadger's free balance endpoint `GET /v1/account/me`
+  (x-api-key header) and added it to the health check below.
+- Added `test_price_exactly_at_ceiling_survives_prefilter` (suite 80→81).
 
 ## In progress / where it stopped
 
-Nothing half-built. Remaining items are owner actions (below) plus
-watching the cron. The 19:54 UTC scheduled run failed (old code + new
-key — transitional, expected); everything from 19:56 UTC on should be
-green.
+Nothing half-built. The only open item is the owner's top-up (above).
 
 ## Next steps, in priority order
 
-1. **Owner: top up $10 at ScrapeBadger** (PAYG, card or crypto, credits
-   never expire) BEFORE trial credits run out (~700-750 left as of
-   ~21:00 UTC ≈ ~12h of cron). When they run out, runs go red on search
-   failures until the top-up — annoying but loud, not silent.
-2. Nothing else. Scheduled (not just dispatched) cron firings are
-   CONFIRMED green on the new transport: 20:13 and 20:41 UTC runs,
-   normal GitHub drift. Local task disable + .env key restore: DONE.
-   The pinger is fully cloud-hosted; the owner's laptop can sleep or
-   shut down with zero effect.
+1. **Owner: top up $10 at ScrapeBadger TODAY** — ~70 credits left as of
+   15:15 UTC, dead in a few hours at cron pace.
+2. Optional, owner call: add "high wasted" (common misspelling of
+   high-waisted, seen live 08-25) to `EXCLUDED_TERMS`. Not added —
+   criteria edits go through the owner per standing scope rule.
+3. If the missed 08-24 listing's URL turns up, diagnose which drop
+   reason applied (sold-between-runs vs card size format vs page-1).
 
 ## Settled questions (do not re-litigate)
 
-- **Bright Data is dead for depop.com** — compliance block verified live
-  2026-08-23, KYC is business-only, personal accounts cannot pass. Treat
-  as the standing result; do not retry it or suggest KYC.
-- **Scraper = ScrapeBadger Depop API**, chosen 2026-08-23 under the
-  owner's $10/month budget. ScraperAPI/ScrapingBee/ZenRows/ScrapFly all
-  have $30-50 monthly minimums — out. Don't re-shop unless pricing or
-  the API breaks.
-- Hosting = GitHub Actions cron `*/10` (owner's call 2026-08-19,
-  reaffirmed by the cost math: 4,464 searches/month ≈ $6.70). Local
-  hosting is out (laptop sleep + 403s, documented 2026-08-19).
-- Criteria are size 0 ONLY as of 2026-08-23 (expert revision). XXS kept
-  as the letter form of 0 — flagged to owner, unobjected.
-- Condition granularity loss (UsedCondition → passes) is accepted, per
-  the owner's standing "ping and I judge from the photo" preference.
+- **The $25 price cap is INCLUSIVE at every layer** (verified live
+  2026-08-25): ScrapeBadger's server-side `price_max=25` returns
+  $25.00 cards (probe: sort=priceDescending, top cards exactly 25.00,
+  identical with price_max=25.01); the card prefilter drops only
+  strictly-over (`> MAX_PRICE`); `filters._matches_price` is `<=`.
+  Locked by a regression test. An exactly-$25.00 size-0 listing WILL
+  ping. Note: `sort=priceDescending` works on ScrapeBadger search
+  (probe-verified), alongside `newest`.
+- **Bright Data is dead for depop.com** (compliance block verified
+  2026-08-23; KYC business-only). Do not retry.
+- **Scraper = ScrapeBadger Depop API** under the $10/month budget;
+  competitors have $30–50 minimums. Don't re-shop unless pricing or the
+  API breaks.
+- Hosting = GitHub Actions cron `*/10` (real cadence ~30–50 min due to
+  GitHub drift — accepted). Local hosting is out.
+- Criteria are size 0 ONLY (XXS kept as the letter form of 0). Max $25.
+- Condition granularity loss (UsedCondition → passes) is accepted;
+  photos + text dealbreakers cover it.
 - Direct-fetch RSC path stays as the no-key fallback (residential IPs
-  only); its parsing and fixtures are unchanged and still tested.
+  only) — also handy free for fetching individual listing pages when
+  diagnosing (works from the owner's machine; datacenter IPs get 403).
 
 ## Where everything lives
 
 | path | what it is |
 |---|---|
-| `config.py` | ALL criteria knobs + .env loading + ScrapeBadger config (MARKET, MAX_DETAIL_FETCHES_PER_RUN) |
+| `config.py` | ALL criteria knobs + .env loading + ScrapeBadger config |
 | `depop_client.py` | both transports: ScrapeBadger two-step (key set) and direct RSC (no key); the only file to touch if either changes |
 | `tracker.py` | orchestration + the "seen = evaluated" semantics writeup |
 | `notifier.py` | ntfy push + alert history append |
 | `alerts_history.jsonl` | full content of every ping sent (tracked, committed back by Actions) |
-| `seen_listings.json` | evaluated-listing state: slugs (new) + numeric ids (pre-2026-08-23, aging out) |
+| `seen_listings.json` | evaluated-listing state: slugs; numeric ids pre-2026-08-23, aging out. Actions commits it back — pull before reading |
 | `.github/workflows/check_listings.yml` | the scheduler: cron `*/10` + secret guard + commit-back |
-| `setup_task.ps1` | local Task Scheduler registration — deprecated, task pending disable (Next steps 2) |
-| `data\logs\tracker.log` | local runs' log (gitignored); Actions logs to the Actions console |
-| `CRITERIA.md` | expert's answers — the spec behind config.py (Q7 revised 2026-08-23) |
-| `tests/` | 71 tests; `test_scrapebadger_fixture.py` + `tests/fixtures/scrapebadger_*.json` are real captured responses |
+| `setup_task.ps1` | local Task Scheduler registration — deprecated; task is disabled, leave it disabled |
+| `CRITERIA.md` | expert's answers — the spec behind config.py |
+| `tests/` | 81 tests; `test_client_transport.py` holds the prefilter + boundary tests |
 
 ## Operational landmines
 
 1. Scheduled Actions runs are RED on purpose if `SCRAPER_API_KEY` is
-   missing — that's the guard, not a bug. Same if ScrapeBadger credits
-   run out: red runs near the top of the month-ish boundary = check the
-   credit balance first.
-2. **"0 listings returned" is NORMAL and healthy now** (prefilter
-   discards non-size-0 cards before any spend). The health signal is the
-   log line "N cards returned" with N > 0 (24 typical, never genuinely
-   0 for this query — a 0-cards line logs as WARNING).
-3. Free-tier rate limit is 5 requests/minute; the client sleeps and
-   retries on 429 (`reset_at`-aware). A run with many new size-0
-   listings can legitimately take a few minutes.
+   missing or credits are exhausted — check `GET /v1/account/me` first
+   on unexplained red runs.
+2. **"0 listings returned" is NORMAL and healthy** (prefilter discards
+   non-size-0 cards free). Health signal = "N cards returned" with
+   N > 0 (24 typical; 0 cards logs as WARNING).
+3. Free-tier rate limit is 5 requests/minute; client sleeps/retries on
+   429 (`reset_at`-aware). A run with many new size-0 listings can take
+   a few minutes.
 4. Do NOT re-enable the local 2-min task while `.env` holds the live
-   `SCRAPER_API_KEY` — at that cadence it burns ~300 credits/hour
-   (~$32/month pace; this actually happened for ~40 minutes on
-   2026-08-23 before being caught). It is disabled; leave it disabled.
-   Related: ScrapeBadger's `sizes` search param is silently ignored
-   (verified 2026-08-23) — size filtering is local-only, don't re-add
-   the param without a live re-test.
+   `SCRAPER_API_KEY` (~300 credits/hour; happened 08-23). It is
+   disabled; leave it disabled. ScrapeBadger's `sizes` search param is
+   silently ignored (verified 08-23) — size filtering is local-only.
 5. If the local task is ever recreated by hand it reverts to
    Interactive-only + battery-restricted — re-register via
-   `setup_task.ps1` (elevated). (Moot once disabled.)
-6. Schema errors from the client = Depop or ScrapeBadger changed shape;
-   fix `depop_client.py` only. Search/detail/normalize are separate
-   functions — check which layer broke first. Unknown condition strings
-   log a WARNING and pass the filter — add them to `_CONDITION_MAP` once
-   understood.
-7. Reconfigure stdout to UTF-8 in any new CLI entry point (emoji in
-   listing text crashes bare prints on Windows).
+   `setup_task.ps1` (elevated). (Moot while disabled.)
+6. Schema errors = Depop or ScrapeBadger changed shape; fix
+   `depop_client.py` only. Unknown condition strings log WARNING and
+   pass — add to `_CONDITION_MAP` once understood.
+7. Reconfigure stdout to UTF-8 in any new CLI entry point (emoji).
 8. Never set ANTHROPIC_API_KEY in this repo's automations (Max-plan rule).
 9. Notification size shown verbatim, never UK-stripped (UK 8 = US 4).
 10. Bare "4"/"6" are NOT excluded terms (collide with size mentions);
     only inch-marked forms. Don't "fix" it.
+11. Actions commits state back to main — **`git pull` before reading
+    `seen_listings.json`/`alerts_history.jsonl` locally**, and before
+    pushing.
 
 ## Quick health check
 
 ```powershell
+git pull
 gh run list --workflow=check_listings.yml --limit 5
 gh run view --log $(gh run list --workflow=check_listings.yml --limit 1 --json databaseId --jq '.[0].databaseId') | Select-String "cards returned"
+# credit balance (free call; key is in .env as SCRAPER_API_KEY):
+# curl -H "x-api-key: <key>" https://scrapebadger.com/v1/account/me
 .venv\Scripts\python.exe -m unittest discover tests
 ```
 Healthy ≈ recent runs green, latest log shows "24 cards returned, N
-survived prefilter" (0 survivors is normal; card prices all ≤ $25 now
-that price_max is server-side), 80 tests OK. Red runs + "insufficient
-credits"-shaped errors = top up ScrapeBadger.
+survived prefilter" (0 survivors normal), 81 tests OK, credit balance
+comfortably above ~350 (a day's burn). Red runs = check credits first.

@@ -143,6 +143,16 @@ class TestScrapeBadgerPrefilter(unittest.TestCase):
         self.assertEqual(listings, [])
         self.assertEqual(mock_get.call_count, 1)
 
+    def test_price_exactly_at_ceiling_survives_prefilter(self):
+        # The $25 cap is inclusive at every layer: filters._matches_price
+        # (<=), this prefilter (drops only strictly-over), and ScrapeBadger's
+        # server-side price_max (verified live 2026-08-25: price_max=25
+        # returns $25.00 cards).
+        cards = [_card(slug="at-ceiling", price="25.00")]
+        listings, mock_get = self._run_with_cards(cards, max_price=25.0)
+        self.assertEqual(len(listings), 1)
+        self.assertEqual(mock_get.call_count, 2)  # search + detail
+
     def test_skip_ids_card_produces_no_detail_request(self):
         cards = [_card(slug="already-seen")]
         listings, mock_get = self._run_with_cards(cards, skip_ids={"already-seen"})
