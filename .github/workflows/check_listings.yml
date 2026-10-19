@@ -18,9 +18,17 @@ name: Check Depop listings
 # below also keeps this repo active, which prevents GitHub's
 # 60-day-inactivity auto-disable from ever triggering on this cron.
 
+# ARCHIVED 2026-10-19: the schedule is intentionally commented out, not
+# deleted, so reviving this project is a one line uncomment. Do NOT rely on
+# GitHub's 60-day-inactivity auto-disable to stop this cron: the "Commit state
+# back" step below pushes to the repo on every run, which keeps the repo
+# active and prevents that auto-disable from ever firing. The cron had to be
+# switched off explicitly. Leaving it on would have kept spending ScrapeBadger
+# credits (~$6.70/month on search calls alone) on a project nobody is using.
+# workflow_dispatch is left enabled so a manual run is still possible.
 on:
-  schedule:
-    - cron: "*/10 * * * *"
+  # schedule:
+  #   - cron: "*/10 * * * *"
   workflow_dispatch: {}
 
 permissions:
