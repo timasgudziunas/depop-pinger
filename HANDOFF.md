@@ -2,7 +2,9 @@
 
 **STATUS: ARCHIVED as of 2026-10-19.** Stale since August 2026, the owner
 is no longer using it, and it was quietly spending ScrapeBadger credits every
-10 minutes on a watched item nobody was buying.
+10 minutes on a watched item nobody was buying. **Closed out 2026-10-21:**
+archive commit pushed, GitHub repo archived (read-only), local task
+unregistered, scraper key disabled and deleted. Nothing external remains on.
 
 ---
 
@@ -17,6 +19,14 @@ one line uncomment. Important: this cron could NOT have been left to GitHub's
 which permanently keeps the repo active and prevents that auto-disable from
 ever firing. It had to be switched off explicitly.
 
+The disabling commit was pushed on 2026-10-21 as `f342ca7`, after a clean
+rebase onto three `update pinger state [auto]` commits the cron had pushed
+in September. Between the local archive commit (2026-10-19) and the push the
+cron fired 11 more times, every run failing in about 10 seconds with
+ScrapeBadger HTTP 401; the last successful run was 2026-09-03. The GitHub
+repo was then archived (Settings, Archive), which disables Actions entirely.
+Unarchive on GitHub before pushing anything on revive.
+
 **No process is running.** Confirmed via `tasklist` on 2026-10-19. The only
 live `python.exe` on the machine belongs to a different project.
 
@@ -25,24 +35,13 @@ workflow edit.
 
 ---
 
-## Open loose end: undeleted Windows scheduled task
+## Windows scheduled task: UNREGISTERED (2026-10-21)
 
-The task `\DepopPinger\Check Listings` still EXISTS in Task Scheduler but is
-DISABLED. Its last run was 2026-08-23, so nothing is firing. Attempts to
-delete it with `schtasks /delete` and `Unregister-ScheduledTask` both returned
-"Access is denied" because deletion requires an elevated session.
-
-Owner: run this in an elevated PowerShell to remove it:
-
-```powershell
-Unregister-ScheduledTask -TaskPath '\DepopPinger\' -TaskName 'Check Listings' -Confirm:$false
-```
-
-Even if the task were somehow re-enabled before deletion, it would fail
-harmlessly: once the project folder moves into `archives/`, the task's
-configured executable path (`...\projects\depop-pinger\.venv\Scripts\python.exe`)
-becomes invalid. `setup_task.ps1` in the repo recreates the task if the
-project is ever revived.
+`\DepopPinger\Check Listings` was Disabled on 2026-10-19 (last run
+2026-08-23) and unregistered by the owner in an elevated PowerShell on
+2026-10-21. `Get-ScheduledTask -TaskPath '\DepopPinger\'` returns nothing.
+`setup_task.ps1` in the repo recreates the task if the project is ever
+revived.
 
 ---
 
@@ -55,13 +54,10 @@ requests are free. The API key lives in the GitHub Actions secret
 4,464 x 10 credits = 44,640 credits/month = approximately $6.70/month.
 Detail calls add a bounded amount on top.
 
-The cron is now off, so no credits are actively burning. However, the
-`SCRAPER_API_KEY` secret is presumably still valid. An unused but live
-pay-as-you-go key is the kind of thing that gets forgotten and then either
-drains unexpectedly or quietly expires. **Owner: consider revoking the key
-or at minimum checking the remaining credit balance at the ScrapeBadger
-dashboard.** Balance endpoint (free, no credits): `GET
-https://scrapebadger.com/v1/account/me` with header `x-api-key: <key>`.
+**The key is gone.** It was already disabled on the ScrapeBadger side and the
+owner deleted it on 2026-10-21. Every cron run from 2026-10-03 onward had
+returned HTTP 401, consistent with that. The `SCRAPER_API_KEY` repo secret
+still exists but is inert. On revive, issue a new key and update the secret.
 
 **ntfy.sh** (`NTFY_TOPIC` secret): ntfy.sh is free for personal use at the
 public tier. No billing exposure, but the topic name is still a live secret
